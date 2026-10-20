@@ -1,10 +1,10 @@
-# Qwen3-1.7B — Suite de Arquitectura Modular de Alto Calibre
+# Qwen3-1.7B — Reimplementación Modular y Didáctica (Proyecto Personal)
 
-> **Licencia:** Apache License 2.0 (Copyright 2024-2026 The Qwen team, Alibaba Group y colaboradores).  
-> **Conformidad Legal:** Todos los componentes derivados mantienen los avisos de atribución y licencias originales de Apache 2.0.  
-> **Rutas y Referencias:** Todas las rutas contenidas en este documento son estrictamente relativas a la raíz del proyecto.
+> **Fin Educativo:** Arquitectura en PyTorch puro construida con la máxima fidelidad posible a la especificación oficial de Qwen3-1.7B para aprender y desentrañar cómo opera un LLM por dentro.  
+> **Licencia:** Apache License 2.0 (Atribución original a The Qwen team, Alibaba Group y colaboradores).  
+> **Filosofía:** Cero cajas negras. Código explícito, legible y desacoplado para estudio e investigación personal.
 
-Esta suite contiene la reimplementación modular, limpia y desacoplada de la arquitectura **Qwen3-1.7B**, organizada bajo estándares de ingeniería de software para sistemas de aprendizaje profundo de alto rendimiento.
+Esta suite contiene la reimplementación modular, limpia y didáctica de la arquitectura **Qwen3-1.7B**, organizada para desmitificar cada componente matemático de un Large Language Model moderno.
 
 ---
 

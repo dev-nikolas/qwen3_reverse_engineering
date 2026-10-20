@@ -1,16 +1,15 @@
-# Qwen3-1.7B — Informe Completo de Ingeniería Inversa y Forense Mecanicista
+# Qwen3-1.7B — Proyecto Personal de Ingeniería Inversa y Desmitificación de un LLM
 
-> **Investigación Forense de Arquitectura, Pesos Binarios Safetensors, Circuitos de Inducción, Geometría Espectral e Intervención Causal**  
-> **Modelo Evaluado:** `Qwen/Qwen3-1.7B` (Alibaba Cloud / Licencia Apache 2.0)  
-> **Entorno:** Local (Sin conexión en la nube, 100% ejecutado en CPU y RAM local)  
-> **Conformidad Legal:** Todos los componentes derivados mantienen los avisos de atribución y licencias originales de Apache 2.0.  
-> **Rutas y Referencias:** Todas las rutas contenidas en este documento son estrictamente relativas a la raíz del proyecto.
+> **Proyecto Personal con Fin Educativo:** Un viaje práctico y transparente para aprender cómo se compone un LLM moderno desde adentro hacia afuera, desmitificando el misticismo de la inteligencia artificial.  
+> **Código Fiel y Transparente:** Implementado en PyTorch puro, lo más cercano y riguroso posible a la arquitectura oficial de `Qwen/Qwen3-1.7B` (Alibaba Cloud / Licencia Apache 2.0).  
+> **Objetivo Didáctico:** Demostrar que un LLM no es magia negra alienígena, sino una composición hermosa y elegante de álgebra lineal, normalizaciones, atención por bloques y cálculo tensorial.  
+> **Entorno:** 100% Local (CPU/GPU, sin APIs externas obligatorias, independiente de librerías opacas).
 
 ---
 
 ## 📑 Tabla de Contenidos
 
-1. [Resumen Ejecutivo](#-resumen-ejecutivo)
+1. [Propósito del Proyecto y Resumen Didáctico](#-propósito-del-proyecto-y-resumen-didáctico)
 2. [Estructura del Proyecto y Archivos Locales](#-estructura-del-proyecto-y-archivos-locales)
 3. [Código Fuente de Alto Calibre (`source_code/`)](#-código-fuente-de-alto-calibre)
 4. [Análisis Forense Binario de los Pesos (Safetensors)](#-análisis-forense-binario-de-los-pesos)
@@ -25,15 +24,24 @@
 13. [Logit Lens: Emergencia y Formación de Conceptos](#-logit-lens-emergencia-de-conceptos)
 14. [Comparativa Arquitectónica: Qwen3 vs Llama 3 vs Gemma 2 vs DeepSeek](#-comparativa-arquitectónica)
 15. [Consola Maestra y Guía de Ejecución Centralizada](#-consola-maestra-y-guía-de-ejecución)
-16. [Hoja de Ruta y Tareas Pendientes para Mañana](PENDIENTE_MAÑANA.md)
 
 ---
 
-## 🔭 Resumen Ejecutivo
+## 🔭 Propósito del Proyecto y Resumen Didáctico
 
-Este repositorio alberga la ingeniería inversa mecanicista más exhaustiva aplicada al modelo **Qwen3-1.7B**. Mediante técnicas avanzadas de interpretabilidad mecanística (Logit Lens, descomposiciones en valores singulares SVD, ablación sistemática de capas, trasplantes causales, censo de 448 cabezas, detección de dimensiones rebeldes y análisis espectral de matrices $W_{OV}$), hemos logrado descifrar no solo cómo está programado el modelo a nivel de código PyTorch, sino cómo fluye la información matemática a través de sus **1,720,574,976 parámetros**.
+Este proyecto personal nació con un objetivo de aprendizaje profundo: **desarmar un modelo de lenguaje de última generación (LLM) pieza por pieza para entender cómo funciona realmente su maquinaria interna sin depender de cajas negras ni misticismo**.
 
-### Métricas Fundamentales de la Arquitectura:
+A través del estudio minucioso de **Qwen3-1.7B** (1,720,574,976 parámetros), este repositorio reconstruye y documenta cada tensor, capa y mecanismo con código PyTorch lo más limpio, fiel y didáctico posible.
+
+### ¿Cómo se compone realmente un LLM moderno?
+Lejos de la falsa creencia de que un LLM es un código esotérico e incomprensible, su núcleo estructural es sorprendentemente homogéneo y elegante:
+1. **Embedding Matrix:** Mapeo de tokens a vectores de 2,048 dimensiones.
+2. **28 Bloques Decoder Idénticos:** Iteración repetitiva de dos operaciones fundamentales:
+   - **Atención GQA (Grouped Query Attention 16:8) con QK-RMSNorm:** Donde los tokens dialogan y se intercambian información contextual.
+   - **SwiGLU MLP:** Red densa de proyección ($2048 \to 6144 \to 2048$) que actúa como memoria asociativa factual.
+3. **RMSNorm Final & LM Head:** Normalización del residual stream y proyección lineal hacia los 151,936 logits del vocabulario.
+
+### Métricas Fundamentales Aprendidas e Implementadas:
 * **Capas Transformer:** 28 bloques decodificadores residuales con pre-normalización dual.
 * **Dimensión Oculta ($d_{model}$):** 2,048 dimensiones.
 * **Atención GQA (Grouped Query Attention):** 16 cabezas de Query ($d_k=128$), 8 cabezas de Key/Value. Factor de compresión KV: 2:1.
