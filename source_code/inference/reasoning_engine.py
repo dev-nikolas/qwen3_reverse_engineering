@@ -53,8 +53,8 @@ class Qwen3ReasoningEngine:
 
     def __init__(
         self,
-        model,
-        tokenizer,
+        model=None,
+        tokenizer=None,
         max_thinking_tokens: int = 512,
         device: str = "cpu"
     ):

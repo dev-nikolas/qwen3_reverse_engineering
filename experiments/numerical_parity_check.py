@@ -27,8 +27,8 @@ REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
 def calculate_metrics(tensor_a, tensor_b) -> Dict[str, float]:
     """Calcula discrepancia absoluta máxima, media L1 y similitud coseno."""
-    import torch
-    import torch.nn.functional as F
+    import torch  # type: ignore
+    import torch.nn.functional as F  # type: ignore
 
     diff = (tensor_a.float() - tensor_b.float()).abs()
     max_diff = diff.max().item()
@@ -56,8 +56,8 @@ def run_parity_audit():
     print("=" * 72)
 
     try:
-        import torch
-        import torch.nn as nn
+        import torch  # type: ignore
+        import torch.nn as nn  # type: ignore
         from source_code.models.standalone_qwen3 import StandaloneQwen3Config, StandaloneQwen3ForCausalLM
         from source_code.layers.normalization.rmsnorm import RMSNorm
         from source_code.layers.feed_forward.swiglu import SwiGLU
@@ -180,7 +180,7 @@ def run_parity_audit():
     print("\n[5/5] Verificando Logits de Desembebing y Probabilidad Softmax...")
     probs = torch.softmax(logits, dim=-1)
     prob_sums = probs.sum(dim=-1)
-    prob_valid = bool(torch.allclose(prob_sums, torch.ones_like(prob_sums), atol=1e-5))
+    prob_valid = torch.allclose(prob_sums, torch.ones_like(prob_sums), atol=1e-5)
 
     results["tested_components"]["lm_head_logits"] = {
         "shape": list(logits.shape),

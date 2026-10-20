@@ -1,8 +1,8 @@
 import os
 import sys
 import unittest
-import torch
-import torch.nn as nn
+import torch  # type: ignore
+import torch.nn as nn  # type: ignore
 
 # Aseguramos que source_code esté en el sys.path
 SRC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -934,6 +934,103 @@ class TestQwen3FullSuite(unittest.TestCase):
         loss = out.sum()
         loss.backward()
         self.assertIsNotNone(model.model.embed_tokens.weight.grad)
+
+    def test_52_download_weights_catalog_and_integrity(self):
+        import sys
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "tools"))
+        from download_weights import EXPECTED_FILES, format_size, format_time  # type: ignore
+
+        self.assertIn("model-00001-of-00002.safetensors", EXPECTED_FILES)
+        self.assertIn("model-00002-of-00002.safetensors", EXPECTED_FILES)
+        self.assertTrue(EXPECTED_FILES["model-00001-of-00002.safetensors"]["essential"])
+        self.assertEqual(EXPECTED_FILES["model-00001-of-00002.safetensors"]["size"], 3441185608)
+        self.assertEqual(EXPECTED_FILES["model-00002-of-00002.safetensors"]["size"], 622329984)
+
+        # Formateo de bytes y tiempo
+        self.assertIn("GB", format_size(3441185608))
+        self.assertEqual(format_time(65), "01:05")
+
+    def test_53_awq_4bit_packing_and_layer(self):
+        from inference.awq_quantizer import pack_int4_weights, unpack_int4_weights, AWQ4BitLinear, AWQChannelProtector
+
+        # Test pack / unpack roundtrip
+        q_original = torch.tensor([[-8, -5, 0, 3, 7, -2], [4, -1, 0, 7, -8, 2]], dtype=torch.int8)
+        packed = pack_int4_weights(q_original)
+        self.assertEqual(packed.dtype, torch.uint8)
+        self.assertEqual(packed.shape, (2, 3))  # 6 cols comprimidas a 3 bytes
+
+        unpacked = unpack_int4_weights(packed, target_in_features=6)
+        self.assertTrue(torch.equal(q_original, unpacked))
+
+        # Test AWQ4BitLinear layer forward
+        linear = torch.nn.Linear(32, 16, bias=False)
+        act_scales = torch.ones(32)
+        # Rogue dimension index 10 (simulada en dimensión reducida)
+        protector = AWQChannelProtector(alpha=0.5, rogue_dim_index=10)
+        awq_layer = AWQ4BitLinear.from_linear(linear, act_scales, group_size=16, protector=protector)
+
+        self.assertEqual(awq_layer.packed_weight.shape, (16, 16))
+        self.assertEqual(awq_layer.scales.shape, (32,))
+
+        x = torch.randn(2, 4, 32)
+        out = awq_layer(x)
+        self.assertEqual(out.shape, (2, 4, 16))
+        self.assertFalse(torch.isnan(out).any())
+
+    def test_54_induction_copy_suppression_bench(self):
+        from inference.copy_suppression import CopySuppressionController
+
+        controller = CopySuppressionController(dla_discount_factor=0.3)
+        logits = torch.zeros(1, 100)
+        logits[0, 42] = 5.0
+        logits[0, 15] = 5.0
+
+        # Secuencia reciente donde 42 acaba de aparecer
+        history = [10, 20, 30, 42]
+        calibrated = controller.suppress_repetition(logits, history)
+
+        # El logit de 42 debe haberse suprimido respecto a 15
+        self.assertLess(calibrated[0, 42].item(), logits[0, 42].item())
+        self.assertEqual(calibrated[0, 15].item(), logits[0, 15].item())
+
+
+    def test_55_sft_trainer_step_and_convergence(self):
+        from training.sft_trainer import SFTTrainer
+        from models.standalone_qwen3 import StandaloneQwen3ForCausalLM
+
+        model = StandaloneQwen3ForCausalLM(self.config)
+        trainer = SFTTrainer(model, learning_rate=1e-3, warmup_steps=2, max_steps=10, use_checkpointing=False)
+
+        dummy_batch = torch.randint(0, self.config.vocab_size, (2, 8))
+        stats1 = trainer.train_step(dummy_batch)
+
+        self.assertIn("loss", stats1)
+        self.assertIn("perplexity", stats1)
+        self.assertIn("tokens_per_sec", stats1)
+        self.assertEqual(stats1["step"], 1)
+
+    def test_56_sft_epoch_with_sequence_packing(self):
+        from training.sft_trainer import SFTTrainer
+        from models.standalone_qwen3 import StandaloneQwen3ForCausalLM
+
+        model = StandaloneQwen3ForCausalLM(self.config)
+        trainer = SFTTrainer(model, learning_rate=1e-3, max_steps=5, use_checkpointing=False)
+
+        samples = [
+            {"input_ids": torch.randint(0, self.config.vocab_size, (1, 6))},
+            {"input_ids": torch.randint(0, self.config.vocab_size, (1, 8))},
+        ]
+        metrics = trainer.train_epoch(samples)
+        self.assertGreaterEqual(len(metrics), 1)
+        self.assertTrue(all("loss" in m for m in metrics))
+
+    def test_57_forensic_api_spec(self):
+        import sys
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "tools"))
+        from forensic_api import ForensicAPIHandler  # type: ignore
+
+        self.assertTrue(hasattr(ForensicAPIHandler, "do_GET"))
+        self.assertTrue(hasattr(ForensicAPIHandler, "do_OPTIONS"))
 
 
 if __name__ == "__main__":

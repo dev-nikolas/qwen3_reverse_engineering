@@ -25,7 +25,7 @@ Este módulo replica y amplifica dicho comportamiento de forma programática y p
 durante la fase de decodificación autoregresiva.
 """
 
-import torch
+import torch  # type: ignore
 
 class CopySuppressionController:
     """
@@ -40,11 +40,23 @@ class CopySuppressionController:
         self,
         base_suppression_strength: float = 1.25,
         recency_decay: float = 0.85,
-        min_suppression_limit: float = 0.05
+        min_suppression_limit: float = 0.05,
+        dla_discount_factor: float | None = None
     ):
-        self.base_suppression_strength = base_suppression_strength
+        if dla_discount_factor is not None:
+            self.base_suppression_strength = float(dla_discount_factor) * 5.0
+        else:
+            self.base_suppression_strength = base_suppression_strength
         self.recency_decay = recency_decay
         self.min_suppression_limit = min_suppression_limit
+
+    def suppress_repetition(
+        self,
+        logits: torch.Tensor,
+        context_token_ids: list[int] | torch.Tensor
+    ) -> torch.Tensor:
+        """Alias para apply_suppression."""
+        return self.apply_suppression(logits, context_token_ids)
 
     def apply_suppression(
         self,

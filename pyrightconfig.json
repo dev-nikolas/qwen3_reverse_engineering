@@ -1,0 +1,11 @@
+{
+  "extraPaths": [
+    "C:/Users/AltaPedagogia1/AppData/Local/Programs/Python/Python312/Lib/site-packages",
+    ".",
+    "source_code",
+    "tools"
+  ],
+  "pythonVersion": "3.12",
+  "pythonPlatform": "Windows",
+  "reportMissingImports": "none"
+}

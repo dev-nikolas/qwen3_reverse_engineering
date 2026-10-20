@@ -1,0 +1,65 @@
+{
+  "benchmark": "Qwen3-1.7B Induction & Copy-Suppression Circuit Bench",
+  "patterns_tested": 25,
+  "metrics": {
+    "induction_hit_rate_pct": 96.0,
+    "parasitic_suppression_rate_pct": 100.0,
+    "avg_entropy_preservation_ratio": 1.011870684500273
+  },
+  "critical_heads_profile": {
+    "induction_heads": [
+      "L16H14",
+      "L17H02",
+      "L20H08"
+    ],
+    "suppression_heads": [
+      "L21H04",
+      "L22H11",
+      "L23H09",
+      "L26H01"
+    ],
+    "dla_discount_factor": 0.25
+  },
+  "sample_trials": [
+    {
+      "pattern_len": 4,
+      "target_token": 46792,
+      "top1_predicted": 46792,
+      "induction_hit": true,
+      "distractor_suppressed": true,
+      "entropy_ratio": 1.0134
+    },
+    {
+      "pattern_len": 5,
+      "target_token": 74111,
+      "top1_predicted": 74111,
+      "induction_hit": true,
+      "distractor_suppressed": true,
+      "entropy_ratio": 1.0109
+    },
+    {
+      "pattern_len": 6,
+      "target_token": 136785,
+      "top1_predicted": 136785,
+      "induction_hit": true,
+      "distractor_suppressed": true,
+      "entropy_ratio": 1.0058
+    },
+    {
+      "pattern_len": 7,
+      "target_token": 117907,
+      "top1_predicted": 136785,
+      "induction_hit": false,
+      "distractor_suppressed": true,
+      "entropy_ratio": 1.0102
+    },
+    {
+      "pattern_len": 8,
+      "target_token": 47698,
+      "top1_predicted": 47698,
+      "induction_hit": true,
+      "distractor_suppressed": true,
+      "entropy_ratio": 1.0139
+    }
+  ]
+}

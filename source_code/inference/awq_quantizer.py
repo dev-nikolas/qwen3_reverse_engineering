@@ -26,8 +26,8 @@ Fundamento Matemático:
   X_scaled = X * diag(s)^(-1)  <-- Absorbido en el vector gamma de RMSNorm
 """
 
-import torch
-import torch.nn as nn
+import torch  # type: ignore
+import torch.nn as nn  # type: ignore
 from typing import Dict, Tuple, Optional
 
 
@@ -151,3 +151,120 @@ class AWQLinear(nn.Module):
         W_dequant = (W_reshaped * self.group_scales.unsqueeze(-1)).view(self.out_features, -1)[:, :self.in_features]
 
         return nn.functional.linear(x_norm, W_dequant)
+
+
+def pack_int4_weights(q_int8: torch.Tensor) -> torch.Tensor:
+    """
+    Empaqueta tensores int8 de 4 bits (-8 a +7) en enteros uint8 compactos.
+    Almacena dos nibbles de 4 bits por cada byte, reduciendo el tamaño en memoria al 50%.
+    """
+    clamped = torch.clamp(q_int8, -8, 7).to(torch.int32)
+    unsigned = clamped + 8  # Mapea de [-8, 7] a [0, 15]
+
+    orig_last_dim = unsigned.shape[-1]
+    if orig_last_dim % 2 != 0:
+        unsigned = nn.functional.pad(unsigned, (0, 1), value=8)
+
+    low = unsigned[..., 0::2]
+    high = unsigned[..., 1::2]
+    packed = (low | (high << 4)).to(torch.uint8)
+    return packed
+
+
+def unpack_int4_weights(packed_uint8: torch.Tensor, target_in_features: int) -> torch.Tensor:
+    """
+    Desempaqueta tensores uint8 compactos recuperando los valores originales en int8 con signo (-8 a +7).
+    """
+    low = (packed_uint8 & 0x0F).to(torch.int32) - 8
+    high = ((packed_uint8 >> 4) & 0x0F).to(torch.int32) - 8
+
+    # Intercalar low y high en la última dimensión
+    unpacked = torch.stack([low, high], dim=-1).flatten(-2, -1)
+    if unpacked.shape[-1] > target_in_features:
+        unpacked = unpacked[..., :target_in_features]
+    return unpacked.to(torch.int8)
+
+
+class AWQ4BitLinear(nn.Module):
+    """
+    Capa Lineal ultra-comprimida en 4 bits (W4A16) con protección de canales sobresalientes.
+    
+    Características:
+      - Almacena pesos comprimidos en uint8 (2 nibbles/byte), requiriendo 75% menos VRAM que FP16.
+      - Descuantización por grupos (group_size=128 por defecto).
+      - Protección determinista de la Dimensión Rebelde 1793 mediante vector de escala 'scales'.
+    """
+    def __init__(
+        self,
+        in_features: int,
+        out_features: int,
+        group_size: int = 128
+    ):
+        super().__init__()
+        self.in_features = in_features
+        self.out_features = out_features
+        self.group_size = group_size
+
+        packed_cols = (in_features + 1) // 2
+        self.register_buffer("packed_weight", torch.zeros(out_features, packed_cols, dtype=torch.uint8))
+        self.register_buffer("scales", torch.ones(in_features, dtype=torch.float32))
+
+        num_groups = (in_features + group_size - 1) // group_size
+        self.register_buffer("group_scales", torch.ones(out_features, num_groups, dtype=torch.float32))
+
+    @classmethod
+    def from_linear(
+        cls,
+        linear: nn.Linear,
+        act_scales: torch.Tensor,
+        group_size: int = 128,
+        protector: Optional[AWQChannelProtector] = None
+    ) -> "AWQ4BitLinear":
+        """
+        Construye una capa AWQ4BitLinear a partir de una capa nn.Linear calibrada.
+        """
+        if protector is None:
+            protector = AWQChannelProtector(alpha=0.5, rogue_dim_index=1793)
+
+        out_features, in_features = linear.weight.shape
+        q_weight_8, s, group_scales = protector.protect_and_quantize_layer(
+            linear=linear,
+            act_scales=act_scales,
+            bits=4,
+            group_size=group_size
+        )
+
+        packed = pack_int4_weights(q_weight_8.view(out_features, -1)[:, :in_features])
+
+        layer = cls(in_features=in_features, out_features=out_features, group_size=group_size)
+        layer.packed_weight.copy_(packed)
+        layer.scales.copy_(s)
+        layer.group_scales.copy_(group_scales)
+        return layer
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """
+        Inferencia W4A16:
+          1. Desescala la entrada con s (protegiendo el canal 1793).
+          2. Desempaqueta y descuantiza los pesos W a FP32/FP16.
+          3. Ejecuta la proyección lineal.
+        """
+        # Deshacer escalado en la entrada: x' = x / s
+        x_norm = x / self.scales
+
+        # Desempaquetar pesos de 4 bits
+        unpacked_int8 = unpack_int4_weights(self.packed_weight, self.in_features).float()
+
+        # Descuantizar por grupos
+        num_groups = self.group_scales.shape[1]
+        padded_in = num_groups * self.group_size
+        if padded_in > self.in_features:
+            W_padded = nn.functional.pad(unpacked_int8, (0, padded_in - self.in_features))
+        else:
+            W_padded = unpacked_int8
+
+        W_reshaped = W_padded.view(self.out_features, num_groups, self.group_size)
+        W_dequant = (W_reshaped * self.group_scales.unsqueeze(-1)).view(self.out_features, -1)[:, :self.in_features]
+
+        return nn.functional.linear(x_norm, W_dequant)
+

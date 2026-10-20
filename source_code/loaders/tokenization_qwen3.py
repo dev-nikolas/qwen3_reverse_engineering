@@ -98,13 +98,21 @@ class Qwen2Tokenizer(TokenizersBackend):
         self.add_tokens([AddedToken(token, special=True) for token in self.all_special_tokens])
 
 
+import os
+
 class Qwen3TokenizerNative:
     """Wrapper nativo y ergonómico para tokenización de Qwen3."""
-    def __init__(self, model_dir_or_path: str):
+    def __init__(self, model_dir_or_path: str | None = None):
+        if model_dir_or_path is None:
+            model_dir_or_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "model"))
         self.tokenizer = AutoTokenizer.from_pretrained(model_dir_or_path)
 
-    def encode(self, text: str, add_special_tokens: bool = False):
-        return self.tokenizer.encode(text, add_special_tokens=add_special_tokens)
+    def encode(self, text: str, add_special_tokens: bool = False, return_tensors: str | None = None, **kwargs):
+        ids = self.tokenizer.encode(text, add_special_tokens=add_special_tokens, **kwargs)
+        if return_tensors == "pt":
+            import torch  # type: ignore
+            return torch.tensor([ids])
+        return ids
 
     def decode(self, token_ids, skip_special_tokens: bool = False) -> str:
         return self.tokenizer.decode(token_ids, skip_special_tokens=skip_special_tokens)

@@ -30,7 +30,7 @@ import struct
 import io
 import math
 from typing import Dict, Any, Optional, List
-import torch
+import torch  # type: ignore
 
 # GGUF Constants
 GGUF_MAGIC = 0x46554747  # b"GGUF" in little endian
@@ -327,7 +327,7 @@ class Qwen3GGUFExporter:
         Exportación directa en streaming desde archivos Safetensors a GGUF v3.
         Consumo de memoria O(1) (< 100 MB de RAM) ya que lee y serializa un tensor a la vez.
         """
-        from safetensors import safe_open
+        from safetensors import safe_open  # type: ignore
         import gc
 
         quant_lower = quantization.lower()
@@ -340,7 +340,7 @@ class Qwen3GGUFExporter:
         tensor_to_file = {}
         tensor_shapes = {}
         for s_path in safetensor_paths:
-            with safe_open(str(s_path), framework="pt", device="cpu") as f:
+            with safe_open(s_path, framework="pt", device="cpu") as f:
                 for k in f.keys():
                     tensor_to_file[k] = s_path
                     tensor_shapes[k] = f.get_slice(k).get_shape()
@@ -417,7 +417,7 @@ class Qwen3GGUFExporter:
 
             # Iterar archivo por archivo para minimizar aperturas
             for s_path in safetensor_paths:
-                with safe_open(str(s_path), framework="pt", device="cpu") as sf:
+                with safe_open(s_path, framework="pt", device="cpu") as sf:
                     file_keys = set(sf.keys())
                     matching_infos = [info for info in tensor_infos if info["hf_name"] in file_keys]
                     for info in matching_infos:

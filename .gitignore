@@ -10,3 +10,5 @@ __pycache__
 model/*.safetensors
 *.gguf
 *.bin
+*.pt
+*.pth

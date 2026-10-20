@@ -22,6 +22,8 @@ class PackedSequenceBatch:
     max_seqlen: int
     num_samples: int
 
+PackedBatch = PackedSequenceBatch
+
 
 class SequencePacker:
     """
