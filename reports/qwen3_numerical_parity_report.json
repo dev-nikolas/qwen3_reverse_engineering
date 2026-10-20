@@ -1,0 +1,89 @@
+{
+  "device": "cpu",
+  "tested_components": {
+    "rmsnorm": {
+      "max_abs_diff": 0.0,
+      "mean_l1_diff": 0.0,
+      "relative_error": 0.0,
+      "cosine_similarity": 1.000000238418579,
+      "passed_strict": true
+    },
+    "swiglu": {
+      "max_abs_diff": 0.0,
+      "mean_l1_diff": 0.0,
+      "relative_error": 0.0,
+      "cosine_similarity": 1.0,
+      "passed_strict": true
+    },
+    "gqa": {
+      "max_abs_diff": 0.0,
+      "mean_l1_diff": 0.0,
+      "relative_error": 0.0,
+      "cosine_similarity": 1.0,
+      "passed_strict": true
+    },
+    "lm_head_logits": {
+      "shape": [
+        2,
+        12,
+        1000
+      ],
+      "softmax_sums_to_one": true,
+      "max_logit": 2.425550699234009,
+      "min_logit": -2.1746811866760254
+    }
+  },
+  "layer_stream_checks": [
+    {
+      "layer_index": 0,
+      "mean_rms": 1.0128198862075806,
+      "is_finite": true,
+      "shape": [
+        2,
+        12,
+        256
+      ]
+    },
+    {
+      "layer_index": 1,
+      "mean_rms": 1.0419178009033203,
+      "is_finite": true,
+      "shape": [
+        2,
+        12,
+        256
+      ]
+    },
+    {
+      "layer_index": 2,
+      "mean_rms": 1.066688060760498,
+      "is_finite": true,
+      "shape": [
+        2,
+        12,
+        256
+      ]
+    },
+    {
+      "layer_index": 3,
+      "mean_rms": 1.0875955820083618,
+      "is_finite": true,
+      "shape": [
+        2,
+        12,
+        256
+      ]
+    },
+    {
+      "layer_index": 4,
+      "mean_rms": 1.1127820014953613,
+      "is_finite": true,
+      "shape": [
+        2,
+        12,
+        256
+      ]
+    }
+  ],
+  "overall_status": "PASSED"
+}

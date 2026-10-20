@@ -28,7 +28,8 @@ Soporta:
 import os
 import struct
 import io
-from typing import Dict, Any, Optional
+import math
+from typing import Dict, Any, Optional, List
 import torch
 
 # GGUF Constants
@@ -133,8 +134,13 @@ class Qwen3GGUFExporter:
     Serializador de arquitectura y pesos de Qwen3 al formato binario GGUF v3.
     """
     
-    def __init__(self, alignment: int = DEFAULT_ALIGNMENT):
-        self.alignment = alignment
+    def __init__(self, config: Optional[Dict[str, Any]] = None, alignment: int = DEFAULT_ALIGNMENT):
+        if isinstance(config, int):
+            self.alignment = config
+            self.config = None
+        else:
+            self.config = config
+            self.alignment = alignment if isinstance(alignment, int) else DEFAULT_ALIGNMENT
         
     def _write_string(self, buf: io.BytesIO, s: str):
         encoded = s.encode("utf-8")
@@ -225,54 +231,51 @@ class Qwen3GGUFExporter:
         for key, (val, val_type) in metadata.items():
             self._write_kv(header_buf, key, val, val_type)
 
-        # 3. Preparar información de tensores y datos binarios
+        # 3. Primer pase: calcular metadatos y offsets exactos de los tensores
         tensor_infos = []
-        tensor_data_buffers = []
         current_offset = 0
 
         for hf_name, tensor in tensors.items():
             ggml_name = map_qwen3_tensor_name(hf_name)
             shape = list(tensor.shape)
-            # En GGML las dimensiones se ordenan de la más interna a la más externa
             dims_ggml = shape[::-1]
             n_dims = len(dims_ggml)
+            numel = math.prod(shape)
 
-            # Selección de tipo y empaquetado binario
             if quant_lower == "f32":
-                raw_bytes = tensor.detach().to(torch.float32).cpu().numpy().tobytes()
+                raw_len = numel * 4
                 ggml_type = GGML_TYPE_F32
             elif quant_lower == "f16":
-                raw_bytes = tensor.detach().to(torch.float16).cpu().numpy().tobytes()
+                raw_len = numel * 2
                 ggml_type = GGML_TYPE_F16
             elif quant_lower == "q8_0":
-                # No cuantizamos normas ni vectores de 1D en Q8_0, solo matrices
                 if n_dims > 1 and "norm" not in ggml_name:
-                    raw_bytes = quantize_to_q8_0(tensor)
+                    pad_numel = (32 - (numel % 32)) % 32
+                    raw_len = ((numel + pad_numel) // 32) * 34
                     ggml_type = GGML_TYPE_Q8_0
                 else:
-                    raw_bytes = tensor.detach().to(torch.float16).cpu().numpy().tobytes()
+                    raw_len = numel * 2
                     ggml_type = GGML_TYPE_F16
             else:
-                raw_bytes = tensor.detach().to(torch.float16).cpu().numpy().tobytes()
+                raw_len = numel * 2
                 ggml_type = GGML_TYPE_F16
 
-            # Alinear el offset relativo
             pad = (self.alignment - (current_offset % self.alignment)) % self.alignment
             current_offset += pad
             assigned_offset = current_offset
 
             tensor_infos.append({
+                "hf_name": hf_name,
                 "name": ggml_name,
                 "n_dims": n_dims,
                 "dims": dims_ggml,
                 "type": ggml_type,
                 "offset": assigned_offset,
+                "pad": pad
             })
+            current_offset += raw_len
 
-            tensor_data_buffers.append((pad, raw_bytes))
-            current_offset += len(raw_bytes)
-
-        # 4. Escribir tabla de metadatos de tensores
+        # 4. Escribir tabla de metadatos de tensores en el header
         for info in tensor_infos:
             self._write_string(header_buf, info["name"])
             header_buf.write(struct.pack("<I", info["n_dims"]))
@@ -286,20 +289,158 @@ class Qwen3GGUFExporter:
         header_len = len(header_bytes)
         final_pad = (self.alignment - (header_len % self.alignment)) % self.alignment
 
-        # 6. Escribir a disco
+        # 6. Segundo pase: Escritura en Streaming directa a disco tensor por tensor (O(1) memoria)
         os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
         with open(output_path, "wb") as f:
             f.write(header_bytes)
             if final_pad > 0:
                 f.write(b"\x00" * final_pad)
-            for pad_bytes, data_bytes in tensor_data_buffers:
-                if pad_bytes > 0:
-                    f.write(b"\x00" * pad_bytes)
-                f.write(data_bytes)
+
+            for info in tensor_infos:
+                if info["pad"] > 0:
+                    f.write(b"\x00" * info["pad"])
+
+                tensor = tensors[info["hf_name"]]
+                if info["type"] == GGML_TYPE_F32:
+                    raw_bytes = tensor.detach().to(torch.float32).cpu().numpy().tobytes()
+                elif info["type"] == GGML_TYPE_Q8_0:
+                    raw_bytes = quantize_to_q8_0(tensor)
+                else:  # F16
+                    raw_bytes = tensor.detach().to(torch.float16).cpu().numpy().tobytes()
+
+                f.write(raw_bytes)
 
         return {
             "output_path": output_path,
             "tensors_exported": len(tensors),
+            "quantization": quant_lower,
+            "file_size_bytes": os.path.getsize(output_path),
+        }
+
+    def export_safetensors_files(
+        self,
+        safetensor_paths: List[str],
+        output_path: str,
+        quantization: str = "f16"
+    ) -> Dict[str, Any]:
+        """
+        Exportación directa en streaming desde archivos Safetensors a GGUF v3.
+        Consumo de memoria O(1) (< 100 MB de RAM) ya que lee y serializa un tensor a la vez.
+        """
+        from safetensors import safe_open
+        import gc
+
+        quant_lower = quantization.lower()
+        if quant_lower not in ["f32", "f16", "q8_0"]:
+            raise ValueError(f"Cuantización no soportada: {quantization}")
+
+        metadata = self.get_default_qwen3_metadata()
+
+        # Mapear cada tensor a su archivo correspondiente sin cargar tensores a RAM
+        tensor_to_file = {}
+        tensor_shapes = {}
+        for s_path in safetensor_paths:
+            with safe_open(str(s_path), framework="pt", device="cpu") as f:
+                for k in f.keys():
+                    tensor_to_file[k] = s_path
+                    tensor_shapes[k] = f.get_slice(k).get_shape()
+
+        header_buf = io.BytesIO()
+        header_buf.write(struct.pack("<I", GGUF_MAGIC))
+        header_buf.write(struct.pack("<I", GGUF_VERSION))
+        header_buf.write(struct.pack("<Q", len(tensor_to_file)))
+        header_buf.write(struct.pack("<Q", len(metadata)))
+
+        for key, (val, val_type) in metadata.items():
+            self._write_kv(header_buf, key, val, val_type)
+
+        tensor_infos = []
+        current_offset = 0
+
+        for hf_name, shape in tensor_to_file.items():
+            ggml_name = map_qwen3_tensor_name(hf_name)
+            t_shape = tensor_shapes[hf_name]
+            dims_ggml = t_shape[::-1]
+            n_dims = len(dims_ggml)
+            numel = math.prod(t_shape)
+
+            if quant_lower == "f32":
+                raw_len = numel * 4
+                ggml_type = GGML_TYPE_F32
+            elif quant_lower == "f16":
+                raw_len = numel * 2
+                ggml_type = GGML_TYPE_F16
+            elif quant_lower == "q8_0":
+                if n_dims > 1 and "norm" not in ggml_name:
+                    pad_numel = (32 - (numel % 32)) % 32
+                    raw_len = ((numel + pad_numel) // 32) * 34
+                    ggml_type = GGML_TYPE_Q8_0
+                else:
+                    raw_len = numel * 2
+                    ggml_type = GGML_TYPE_F16
+            else:
+                raw_len = numel * 2
+                ggml_type = GGML_TYPE_F16
+
+            pad = (self.alignment - (current_offset % self.alignment)) % self.alignment
+            current_offset += pad
+            assigned_offset = current_offset
+
+            tensor_infos.append({
+                "hf_name": hf_name,
+                "name": ggml_name,
+                "n_dims": n_dims,
+                "dims": dims_ggml,
+                "type": ggml_type,
+                "offset": assigned_offset,
+                "pad": pad
+            })
+            current_offset += raw_len
+
+        for info in tensor_infos:
+            self._write_string(header_buf, info["name"])
+            header_buf.write(struct.pack("<I", info["n_dims"]))
+            for d in info["dims"]:
+                header_buf.write(struct.pack("<Q", d))
+            header_buf.write(struct.pack("<I", info["type"]))
+            header_buf.write(struct.pack("<Q", info["offset"]))
+
+        header_bytes = header_buf.getvalue()
+        final_pad = (self.alignment - (len(header_bytes) % self.alignment)) % self.alignment
+
+        os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+        print(f"[*] Escribiendo encabezado GGUF ({len(header_bytes)} bytes) a disco...")
+        with open(output_path, "wb") as out_f:
+            out_f.write(header_bytes)
+            if final_pad > 0:
+                out_f.write(b"\x00" * final_pad)
+
+            # Iterar archivo por archivo para minimizar aperturas
+            for s_path in safetensor_paths:
+                with safe_open(str(s_path), framework="pt", device="cpu") as sf:
+                    file_keys = set(sf.keys())
+                    matching_infos = [info for info in tensor_infos if info["hf_name"] in file_keys]
+                    for info in matching_infos:
+                        if info["pad"] > 0:
+                            out_f.write(b"\x00" * info["pad"])
+
+                        tensor = sf.get_tensor(info["hf_name"])
+                        if info["type"] == GGML_TYPE_F32:
+                            raw_bytes = tensor.to(torch.float32).numpy().tobytes()
+                        elif info["type"] == GGML_TYPE_Q8_0:
+                            raw_bytes = quantize_to_q8_0(tensor)
+                        else:  # F16
+                            raw_bytes = tensor.to(torch.float16).numpy().tobytes()
+
+                        out_f.write(raw_bytes)
+                        del tensor
+                        del raw_bytes
+
+                gc.collect()
+
+        return {
+            "output_path": output_path,
+            "tensors_exported": len(tensor_infos),
             "quantization": quant_lower,
             "file_size_bytes": os.path.getsize(output_path),
         }

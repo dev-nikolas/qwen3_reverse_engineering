@@ -5,7 +5,7 @@
 # Reduces VRAM consumption during backpropagation by discarding intermediate
 # activation tensors in transformer blocks and recomputing them on-demand.
 
-from typing import List, Optional, Type
+from typing import List, Optional, Type, Any
 import torch
 import torch.nn as nn
 from torch.utils.checkpoint import checkpoint
@@ -20,32 +20,19 @@ class CheckpointedBlockWrapper(nn.Module):
         super().__init__()
         self.block = block
 
-    def forward(
-        self,
-        hidden_states: torch.Tensor,
-        rotary_pos_emb: Optional[torch.Tensor] = None,
-        attention_mask: Optional[torch.Tensor] = None,
-        kv_cache: Optional[Any] = None
-    ):
+    def forward(self, *args, **kwargs):
         # Si no requiere gradiente o no estamos entrenando, forward normal sin sobrecoste
-        if not hidden_states.requires_grad or not self.training:
-            return self.block(
-                hidden_states,
-                rotary_pos_emb=rotary_pos_emb,
-                attention_mask=attention_mask,
-                kv_cache=kv_cache
-            )
+        has_grad = any(isinstance(a, torch.Tensor) and a.requires_grad for a in args) or any(
+            isinstance(v, torch.Tensor) and v.requires_grad for v in kwargs.values()
+        )
+        if not has_grad or not self.training:
+            return self.block(*args, **kwargs)
 
-        def custom_forward(h, mask):
-            return self.block(
-                h,
-                rotary_pos_emb=rotary_pos_emb,
-                attention_mask=mask,
-                kv_cache=kv_cache
-            )
+        def custom_forward(*f_args):
+            return self.block(*f_args, **kwargs)
 
         # Usar use_reentrant=False para compatibilidad con autograd avanzado y DDP
-        return checkpoint(custom_forward, hidden_states, attention_mask, use_reentrant=False)
+        return checkpoint(custom_forward, *args, use_reentrant=False)
 
 
 def apply_activation_checkpointing(

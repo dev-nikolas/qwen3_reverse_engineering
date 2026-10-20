@@ -597,7 +597,7 @@
   "activation_probing": {
     "test_prompt": "El núcleo cognitivo de Simple Domain audita datos deterministas",
     "token_count": 15,
-    "forward_latency_ms": 7054.0,
+    "forward_latency_ms": 3096.28,
     "predicted_next_token_id": 379,
     "predicted_next_token_text": " y",
     "logits_shape": [

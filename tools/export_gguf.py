@@ -115,22 +115,22 @@ def main():
     exporter = Qwen3GGUFExporter(config)
     tensors = {}
 
+    output_path = Path(args.output)
+
     if safetensor_files:
-        try:
-            from safetensors import safe_open
-            print(f"[*] Cargando {len(safetensor_files)} shard(s) de Safetensors...")
-            for sf in safetensor_files:
-                print(f"    - {sf.name} ({sf.stat().st_size / (1024**3):.2f} GB)")
-                with safe_open(str(sf), framework="pt", device="cpu") as f:
-                    for k in f.keys():
-                        tensors[k] = f.get_tensor(k)
-            print(f"[+] {len(tensors)} tensores cargados exitosamente.")
-        except ImportError:
-            print("[-] Falta la librería 'safetensors'. Instala con: pip install safetensors")
-            sys.exit(1)
+        print(f"[*] Detectados {len(safetensor_files)} shard(s) Safetensors oficiales.")
+        for sf in safetensor_files:
+            print(f"    - {sf.name} ({sf.stat().st_size / (1024**3):.2f} GB)")
+        print(f"[*] Exportando a GGUF v3 [Quant: {args.format.upper()}] en streaming continuo...")
+        result = exporter.export_safetensors_files(
+            [str(sf) for sf in safetensor_files],
+            str(output_path),
+            quantization=args.format
+        )
     else:
         # Generar diccionario de tensores sintético representativo
         print("[*] Inicializando tensores canónicos representativos de Qwen3...")
+        tensors = {}
         hidden = config.get("hidden_size", 256)
         vocab = min(config.get("vocab_size", 1000), 1000)
         num_layers = min(config.get("num_hidden_layers", 2), 2)
@@ -151,9 +151,8 @@ def main():
             tensors[f"model.layers.{l}.mlp.up_proj.weight"] = torch.randn(inter, hidden, dtype=torch.float16)
             tensors[f"model.layers.{l}.mlp.down_proj.weight"] = torch.randn(hidden, inter, dtype=torch.float16)
 
-    output_path = Path(args.output)
-    print(f"[*] Exportando a GGUF v3 [Quant: {args.format.upper()}]...")
-    result = exporter.export(tensors, str(output_path), quantization=args.format)
+        print(f"[*] Exportando a GGUF v3 [Quant: {args.format.upper()}]...")
+        result = exporter.export(tensors, str(output_path), quantization=args.format)
 
     print("\n" + "=" * 68)
     print("  EXPORTACIÓN GGUF COMPLETADA CON ÉXITO")

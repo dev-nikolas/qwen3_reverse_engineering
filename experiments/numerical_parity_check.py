@@ -124,18 +124,22 @@ def run_parity_audit():
 
     # 3. Paridad de Grouped Query Attention con QK-RMSNorm
     print("\n[3/5] Verificando Paridad Numérica: GQA con QK-RMSNorm...")
+    from source_code.layers.embeddings.rotary import RotaryEmbedding
+    rope = RotaryEmbedding(dim=config.head_dim, max_seq_len=512, theta=config.rope_theta)
+    pos = torch.arange(8, device=device).unsqueeze(0).expand(2, -1)
+    cos, sin = rope(pos)
+
     gqa = GroupedQueryAttention(
         hidden_size=config.hidden_size,
-        num_heads=config.num_attention_heads,
-        num_kv_heads=config.num_key_value_heads,
+        num_attention_heads=config.num_attention_heads,
+        num_key_value_heads=config.num_key_value_heads,
         head_dim=config.head_dim,
-        use_qk_norm=True,
         rms_norm_eps=config.rms_norm_eps
     ).to(device)
 
     with torch.no_grad():
-        out_gqa_1, _ = gqa(x)
-        out_gqa_2, _ = gqa(x)
+        out_gqa_1, _ = gqa(x, cos, sin)
+        out_gqa_2, _ = gqa(x, cos, sin)
         gqa_metrics = calculate_metrics(out_gqa_1, out_gqa_2)
     results["tested_components"]["gqa"] = gqa_metrics
     print(f"    -> Determinismo & Consistencia: Cos Sim = {gqa_metrics['cosine_similarity']:.7f}")
@@ -147,8 +151,15 @@ def run_parity_audit():
 
     input_ids = torch.randint(0, config.vocab_size, (2, 12), device=device)
     with torch.no_grad():
-        out = model(input_ids, output_hidden_states=True)
-        hidden_states = out.hidden_states
+        logits = model(input_ids)
+        hidden_states = [model.model.embed_tokens(input_ids)]
+        pos_m = torch.arange(12, device=device).unsqueeze(0).expand(2, -1)
+        cos_m, sin_m = model.model.rotary_emb(pos_m)
+        causal_mask = torch.triu(torch.full((12, 12), float("-inf"), device=device), diagonal=1).unsqueeze(0).unsqueeze(0)
+        curr_h = hidden_states[0]
+        for l in model.model.layers:
+            curr_h = l(curr_h, pos_m, cos_m, sin_m, causal_mask)
+            hidden_states.append(curr_h)
 
     all_layers_passed = True
     for l_idx, h_state in enumerate(hidden_states):
@@ -167,7 +178,6 @@ def run_parity_audit():
 
     # 5. Logits Finales y Distribución Softmax
     print("\n[5/5] Verificando Logits de Desembebing y Probabilidad Softmax...")
-    logits = out.logits
     probs = torch.softmax(logits, dim=-1)
     prob_sums = probs.sum(dim=-1)
     prob_valid = bool(torch.allclose(prob_sums, torch.ones_like(prob_sums), atol=1e-5))

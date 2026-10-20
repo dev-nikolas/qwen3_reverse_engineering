@@ -7,7 +7,7 @@
 
 import math
 import random
-from typing import List, Dict, Any, Optional, Callable
+from typing import List, Dict, Any, Optional, Callable, Tuple
 import torch
 import torch.nn as nn
 

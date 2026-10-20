@@ -5,3 +5,8 @@
 __pycache__
 *.pyc
 
+# Pesos binarios pesados (>100MB no permitidos por GitHub)
+*.safetensors
+model/*.safetensors
+*.gguf
+*.bin

@@ -68,4 +68,14 @@ if __name__ == "__main__":
 
     target_script = COMMANDS[cmd]
     print(f"[*] Lanzando: {os.path.relpath(target_script, BASE_DIR)}\n")
-    subprocess.run([sys.executable, target_script])
+
+    # Detectar el ejecutable que posee torch instalado
+    python_bin = sys.executable
+    try:
+        import torch
+    except ImportError:
+        py312 = r"C:\Users\AltaPedagogia1\AppData\Local\Programs\Python\Python312\python.exe"
+        if os.path.exists(py312):
+            python_bin = py312
+
+    subprocess.run([python_bin, target_script] + sys.argv[2:])

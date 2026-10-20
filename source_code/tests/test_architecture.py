@@ -931,7 +931,7 @@ class TestQwen3FullSuite(unittest.TestCase):
         # Verify gradient flow with checkpointing
         x = torch.randint(0, self.config.vocab_size, (self.batch_size, self.seq_len))
         out = model(x)
-        loss = out.logits.sum()
+        loss = out.sum()
         loss.backward()
         self.assertIsNotNone(model.model.embed_tokens.weight.grad)
 
