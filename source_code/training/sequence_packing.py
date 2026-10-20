@@ -35,20 +35,20 @@ class SequencePacker:
         self.pad_token_id = pad_token_id
 
     @staticmethod
-    def build_block_causal_mask(cu_seqlens: torch.Tensor, device: torch.device = None) -> torch.Tensor:
+    def build_block_causal_mask(cu_seqlens: torch.Tensor, device: Optional[torch.device] = None) -> torch.Tensor:
         """
         Construye una máscara causal 2D diagonal por bloques.
         Garantiza que el token j de la secuencia k solo pueda atender a tokens i <= j
         pertenecientes a la misma secuencia k (sin contaminación entre ejemplos empaquetados).
         """
-        total_len = cu_seqlens[-1].item()
+        total_len = int(cu_seqlens[-1].item())
         mask = torch.full((total_len, total_len), float("-inf"), device=device)
 
         # Construir máscara causal para cada bloque independiente
         for i in range(len(cu_seqlens) - 1):
-            start = cu_seqlens[i].item()
-            end = cu_seqlens[i + 1].item()
-            seq_len = end - start
+            start = int(cu_seqlens[i].item())
+            end = int(cu_seqlens[i + 1].item())
+            seq_len = int(end - start)
             
             # Sub-matriz causal triangular inferior (0.0 en attendable, -inf en no attendable)
             sub_mask = torch.triu(torch.full((seq_len, seq_len), float("-inf"), device=device), diagonal=1)

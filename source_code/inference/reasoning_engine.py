@@ -29,7 +29,8 @@ Este motor administra el ciclo de vida del razonamiento deliberativo:
 """
 
 import re
-import torch
+from typing import Any, Dict
+import torch  # type: ignore
 from .sampling import sample_next_token
 
 class Qwen3ReasoningEngine:
@@ -78,7 +79,7 @@ class Qwen3ReasoningEngine:
         temperature_thinking: float = 0.6,
         temperature_answer: float = 0.3,
         force_thinking: bool = True
-    ) -> dict[str, any]:
+    ) -> Dict[str, Any]:
         """
         Ejecuta la generación deliberativa en dos fases acopladas.
         
@@ -92,6 +93,11 @@ class Qwen3ReasoningEngine:
                 'budget_exhausted': bool
             }
         """
+        if self.tokenizer is None or self.model is None:
+            raise ValueError("model y tokenizer deben estar inicializados para generate_with_reasoning.")
+        assert self.tokenizer is not None
+        assert self.model is not None
+
         # Preparar prompt asegurando el inicio de <think> si está habilitado
         working_prompt = prompt.strip()
         if force_thinking and not working_prompt.endswith(self.THINK_START):

@@ -79,7 +79,7 @@ class ForensicAPIHandler(BaseHTTPRequestHandler):
                     round(0.15 + (i * 0.02), 3) for i in range(28)
                 ],
                 "effective_spectral_rank": [
-                    int(1850 - (i * 22)) for i in range(28)
+                    1850 - (i * 22) for i in range(28)
                 ]
             }
             self._set_headers(200)

@@ -39,8 +39,8 @@ if hasattr(sys.stdout, "reconfigure"):
 
 
 def export_awq_checkpoint(
-    model_dir: str = None,
-    output_path: str = None,
+    model_dir: str | None = None,
+    output_path: str | None = None,
     group_size: int = 128,
     rogue_dim_index: int = 1793
 ) -> dict:

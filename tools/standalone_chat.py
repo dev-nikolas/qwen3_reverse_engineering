@@ -36,6 +36,8 @@ if hasattr(sys.stdout, "reconfigure"):
 
 from typing import Any
 
+MODEL_DIR = os.path.join(BASE_DIR, "model")
+
 def start_standalone_chat():
     print("=" * 65)
     print("  QWEN3-1.7B — CHAT STANDALONE NATIVO (100% PYTORCH PURO)")

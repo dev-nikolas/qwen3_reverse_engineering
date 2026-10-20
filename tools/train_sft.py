@@ -67,7 +67,7 @@ def run_sft_pipeline(steps: int = 15, learning_rate: float = 3e-5):
     torch.manual_seed(42)
     samples = []
     for _ in range(steps * 2):
-        seq_len = torch.randint(16, 64, (1,)).item()
+        seq_len = int(torch.randint(16, 64, (1,)).item())
         dummy_ids = torch.randint(100, 5000, (1, seq_len))
         samples.append({"input_ids": dummy_ids})
 

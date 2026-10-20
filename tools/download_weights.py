@@ -117,7 +117,7 @@ def render_progress_bar(downloaded: int, total: int, speed: float, eta: float, f
     bar_length = 28
     if total > 0:
         percent = min(100.0, (downloaded / total) * 100.0)
-        filled = int(bar_length * downloaded // total)
+        filled = bar_length * downloaded // total
         bar = "█" * filled + "░" * (bar_length - filled)
         status_line = (
             f"\r  [{bar}] {percent:5.1f}% | "
