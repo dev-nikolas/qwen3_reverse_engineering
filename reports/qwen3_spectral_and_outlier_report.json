@@ -1,0 +1,499 @@
+{
+  "sequence_length": 74,
+  "hidden_size": 2048,
+  "layers": [
+    {
+      "layer_name": "Embedding",
+      "layer_index": 0,
+      "effective_rank": 63.67,
+      "anisotropy_cosine": 0.0305,
+      "outlier_max_to_mean_ratio": 7.0,
+      "top_outlier_dimensions": [
+        1440,
+        378,
+        1494
+      ],
+      "top_outlier_magnitudes": [
+        0.2,
+        0.17,
+        0.16
+      ]
+    },
+    {
+      "layer_name": "Layer 0",
+      "layer_index": 0,
+      "effective_rank": 66.27,
+      "anisotropy_cosine": 0.3975,
+      "outlier_max_to_mean_ratio": 57.63,
+      "top_outlier_dimensions": [
+        1999,
+        319,
+        166
+      ],
+      "top_outlier_magnitudes": [
+        11.51,
+        5.85,
+        4.24
+      ]
+    },
+    {
+      "layer_name": "Layer 1",
+      "layer_index": 1,
+      "effective_rank": 51.96,
+      "anisotropy_cosine": 0.4311,
+      "outlier_max_to_mean_ratio": 195.7,
+      "top_outlier_dimensions": [
+        425,
+        1536,
+        1999
+      ],
+      "top_outlier_magnitudes": [
+        66.84,
+        46.47,
+        45.19
+      ]
+    },
+    {
+      "layer_name": "Layer 2",
+      "layer_index": 2,
+      "effective_rank": 1.98,
+      "anisotropy_cosine": 0.3464,
+      "outlier_max_to_mean_ratio": 21466.39,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13029.48,
+        8181.03,
+        815.51
+      ]
+    },
+    {
+      "layer_name": "Layer 3",
+      "layer_index": 3,
+      "effective_rank": 2.24,
+      "anisotropy_cosine": 0.3455,
+      "outlier_max_to_mean_ratio": 18345.09,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13030.74,
+        8179.25,
+        815.2
+      ]
+    },
+    {
+      "layer_name": "Layer 4",
+      "layer_index": 4,
+      "effective_rank": 2.45,
+      "anisotropy_cosine": 0.3642,
+      "outlier_max_to_mean_ratio": 16630.81,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13031.21,
+        8178.56,
+        815.01
+      ]
+    },
+    {
+      "layer_name": "Layer 5",
+      "layer_index": 5,
+      "effective_rank": 2.79,
+      "anisotropy_cosine": 0.3458,
+      "outlier_max_to_mean_ratio": 14728.82,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13032.8,
+        8177.59,
+        814.72
+      ]
+    },
+    {
+      "layer_name": "Layer 6",
+      "layer_index": 6,
+      "effective_rank": 2.99,
+      "anisotropy_cosine": 0.3486,
+      "outlier_max_to_mean_ratio": 13768.78,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13035.95,
+        8173.74,
+        814.05
+      ]
+    },
+    {
+      "layer_name": "Layer 7",
+      "layer_index": 7,
+      "effective_rank": 3.18,
+      "anisotropy_cosine": 0.4011,
+      "outlier_max_to_mean_ratio": 12669.66,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13039.29,
+        8167.3,
+        813.28
+      ]
+    },
+    {
+      "layer_name": "Layer 8",
+      "layer_index": 8,
+      "effective_rank": 3.43,
+      "anisotropy_cosine": 0.4188,
+      "outlier_max_to_mean_ratio": 11692.0,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13042.18,
+        8162.65,
+        812.77
+      ]
+    },
+    {
+      "layer_name": "Layer 9",
+      "layer_index": 9,
+      "effective_rank": 4.03,
+      "anisotropy_cosine": 0.4371,
+      "outlier_max_to_mean_ratio": 9949.33,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13050.12,
+        8148.43,
+        811.78
+      ]
+    },
+    {
+      "layer_name": "Layer 10",
+      "layer_index": 10,
+      "effective_rank": 4.97,
+      "anisotropy_cosine": 0.4958,
+      "outlier_max_to_mean_ratio": 8065.42,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13054.3,
+        8142.79,
+        811.68
+      ]
+    },
+    {
+      "layer_name": "Layer 11",
+      "layer_index": 11,
+      "effective_rank": 6.38,
+      "anisotropy_cosine": 0.475,
+      "outlier_max_to_mean_ratio": 6774.51,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13059.68,
+        8132.47,
+        811.2
+      ]
+    },
+    {
+      "layer_name": "Layer 12",
+      "layer_index": 12,
+      "effective_rank": 6.85,
+      "anisotropy_cosine": 0.496,
+      "outlier_max_to_mean_ratio": 6311.16,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13065.12,
+        8122.55,
+        810.92
+      ]
+    },
+    {
+      "layer_name": "Layer 13",
+      "layer_index": 13,
+      "effective_rank": 7.6,
+      "anisotropy_cosine": 0.4939,
+      "outlier_max_to_mean_ratio": 5686.59,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13070.32,
+        8112.64,
+        810.63
+      ]
+    },
+    {
+      "layer_name": "Layer 14",
+      "layer_index": 14,
+      "effective_rank": 8.37,
+      "anisotropy_cosine": 0.512,
+      "outlier_max_to_mean_ratio": 5280.27,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13074.9,
+        8105.85,
+        809.37
+      ]
+    },
+    {
+      "layer_name": "Layer 15",
+      "layer_index": 15,
+      "effective_rank": 9.91,
+      "anisotropy_cosine": 0.5399,
+      "outlier_max_to_mean_ratio": 4462.65,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13079.02,
+        8099.21,
+        810.27
+      ]
+    },
+    {
+      "layer_name": "Layer 16",
+      "layer_index": 16,
+      "effective_rank": 15.37,
+      "anisotropy_cosine": 0.4353,
+      "outlier_max_to_mean_ratio": 3352.27,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13086.55,
+        8094.69,
+        810.42
+      ]
+    },
+    {
+      "layer_name": "Layer 17",
+      "layer_index": 17,
+      "effective_rank": 19.32,
+      "anisotropy_cosine": 0.4751,
+      "outlier_max_to_mean_ratio": 2595.98,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13093.97,
+        8092.64,
+        810.49
+      ]
+    },
+    {
+      "layer_name": "Layer 18",
+      "layer_index": 18,
+      "effective_rank": 23.84,
+      "anisotropy_cosine": 0.4868,
+      "outlier_max_to_mean_ratio": 2004.08,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13110.23,
+        8108.62,
+        814.69
+      ]
+    },
+    {
+      "layer_name": "Layer 19",
+      "layer_index": 19,
+      "effective_rank": 30.96,
+      "anisotropy_cosine": 0.4545,
+      "outlier_max_to_mean_ratio": 1488.76,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13123.64,
+        8120.81,
+        817.84
+      ]
+    },
+    {
+      "layer_name": "Layer 20",
+      "layer_index": 20,
+      "effective_rank": 38.16,
+      "anisotropy_cosine": 0.4482,
+      "outlier_max_to_mean_ratio": 1108.27,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13151.41,
+        8150.18,
+        824.6
+      ]
+    },
+    {
+      "layer_name": "Layer 21",
+      "layer_index": 21,
+      "effective_rank": 43.02,
+      "anisotropy_cosine": 0.4367,
+      "outlier_max_to_mean_ratio": 892.05,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13174.03,
+        8163.65,
+        829.37
+      ]
+    },
+    {
+      "layer_name": "Layer 22",
+      "layer_index": 22,
+      "effective_rank": 47.12,
+      "anisotropy_cosine": 0.4566,
+      "outlier_max_to_mean_ratio": 726.37,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13198.36,
+        8178.91,
+        833.97
+      ]
+    },
+    {
+      "layer_name": "Layer 23",
+      "layer_index": 23,
+      "effective_rank": 50.66,
+      "anisotropy_cosine": 0.4751,
+      "outlier_max_to_mean_ratio": 597.25,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1401
+      ],
+      "top_outlier_magnitudes": [
+        13233.69,
+        8205.91,
+        841.12
+      ]
+    },
+    {
+      "layer_name": "Layer 24",
+      "layer_index": 24,
+      "effective_rank": 53.04,
+      "anisotropy_cosine": 0.535,
+      "outlier_max_to_mean_ratio": 506.13,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1683
+      ],
+      "top_outlier_magnitudes": [
+        13269.47,
+        8229.14,
+        936.27
+      ]
+    },
+    {
+      "layer_name": "Layer 25",
+      "layer_index": 25,
+      "effective_rank": 54.64,
+      "anisotropy_cosine": 0.5802,
+      "outlier_max_to_mean_ratio": 431.38,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1683
+      ],
+      "top_outlier_magnitudes": [
+        13317.19,
+        8266.62,
+        1188.63
+      ]
+    },
+    {
+      "layer_name": "Layer 26",
+      "layer_index": 26,
+      "effective_rank": 55.38,
+      "anisotropy_cosine": 0.6248,
+      "outlier_max_to_mean_ratio": 367.21,
+      "top_outlier_dimensions": [
+        1793,
+        1999,
+        1683
+      ],
+      "top_outlier_magnitudes": [
+        13278.15,
+        8263.45,
+        1674.65
+      ]
+    },
+    {
+      "layer_name": "Post-Norm",
+      "layer_index": 28,
+      "effective_rank": 56.92,
+      "anisotropy_cosine": 0.4767,
+      "outlier_max_to_mean_ratio": 47.09,
+      "top_outlier_dimensions": [
+        425,
+        1960,
+        1446
+      ],
+      "top_outlier_magnitudes": [
+        58.83,
+        56.92,
+        51.52
+      ]
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "top_induction_heads": [
+    {
+      "layer": 16,
+      "head": 14,
+      "induction_score": 0.637
+    },
+    {
+      "layer": 21,
+      "head": 9,
+      "induction_score": 0.4701
+    },
+    {
+      "layer": 21,
+      "head": 8,
+      "induction_score": 0.3663
+    },
+    {
+      "layer": 20,
+      "head": 14,
+      "induction_score": 0.3518
+    },
+    {
+      "layer": 18,
+      "head": 5,
+      "induction_score": 0.2845
+    },
+    {
+      "layer": 3,
+      "head": 10,
+      "induction_score": 0.2652
+    },
+    {
+      "layer": 6,
+      "head": 11,
+      "induction_score": 0.1913
+    },
+    {
+      "layer": 19,
+      "head": 5,
+      "induction_score": 0.1597
+    },
+    {
+      "layer": 13,
+      "head": 14,
+      "induction_score": 0.1559
+    },
+    {
+      "layer": 13,
+      "head": 15,
+      "induction_score": 0.1531
+    }
+  ],
+  "contrastive_knowledge_divergence": [
+    {
+      "layer": 0,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 1,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 2,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 3,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 4,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 5,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 6,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 7,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 8,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 9,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 10,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 11,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 12,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 13,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 14,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 15,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 16,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 17,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 18,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 19,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 20,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 21,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 22,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 23,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 24,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 25,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 26,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    },
+    {
+      "layer": 27,
+      "cosine_similarity": 1.0,
+      "angular_distance_deg": 0.0,
+      "l2_distance": 0.0
+    }
+  ],
+  "thinking_mode_experiment": {
+    "prompt": "<|im_start|>user\nTengo 3 cajas rojas. Dentro de cada caja roja hay 2 cajas verdes. Dentro de cada caja verde hay 4 monedas. ¿Cuántas monedas y cajas hay en total? Piensa detenidamente antes de responder.<|im_end|>\n<|im_start|>assistant\n<think>\n",
+    "generation_time_s": 131.73,
+    "generated_text": "Okay, let's see. The problem is about counting the total number of coins and boxes. So, there are 3 red boxes. Each red box has 2 green boxes inside. Each green box has 4 coins. Hmm, I need to figure out the total number of coins and boxes.\n\nFirst, let me break it down step by step. Starting with the red boxes. There are 3 red boxes. Then, each red box has 2 green boxes. So, for the green boxes, it's 3 red boxes multiplied by 2 green boxes each. That would be 3 * 2 = 6 green boxes. Wait, but the question asks for the total number of coins and boxes. So, the green",
+    "contains_think_close": false
+  }
+}

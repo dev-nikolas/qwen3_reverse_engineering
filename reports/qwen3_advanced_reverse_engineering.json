@@ -1,0 +1,1041 @@
+{
+  "logit_lens_experiment": {
+    "prompt": "El lenguaje de programación más utilizado en la ciencia de datos es",
+    "layers_evolution": [
+      {
+        "layer": 0,
+        "top_1_token": "パパ活",
+        "top_1_prob": 0.1545,
+        "top_5_candidates": [
+          {
+            "token": "パパ活",
+            "token_id": 143216,
+            "probability": 0.1545
+          },
+          {
+            "token": "qli",
+            "token_id": 6905,
+            "probability": 0.1281
+          },
+          {
+            "token": "upplier",
+            "token_id": 71691,
+            "probability": 0.0324
+          },
+          {
+            "token": "semb",
+            "token_id": 4838,
+            "probability": 0.0237
+          },
+          {
+            "token": "obar",
+            "token_id": 31393,
+            "probability": 0.0209
+          }
+        ]
+      },
+      {
+        "layer": 1,
+        "top_1_token": "otope",
+        "top_1_prob": 0.0323,
+        "top_5_candidates": [
+          {
+            "token": "otope",
+            "token_id": 50682,
+            "probability": 0.0323
+          },
+          {
+            "token": "obar",
+            "token_id": 31393,
+            "probability": 0.0303
+          },
+          {
+            "token": "ilon",
+            "token_id": 16917,
+            "probability": 0.0268
+          },
+          {
+            "token": "パパ活",
+            "token_id": 143216,
+            "probability": 0.0268
+          },
+          {
+            "token": "semb",
+            "token_id": 4838,
+            "probability": 0.0236
+          }
+        ]
+      },
+      {
+        "layer": 2,
+        "top_1_token": "otope",
+        "top_1_prob": 0.0626,
+        "top_5_candidates": [
+          {
+            "token": "otope",
+            "token_id": 50682,
+            "probability": 0.0626
+          },
+          {
+            "token": "anko",
+            "token_id": 92852,
+            "probability": 0.0487
+          },
+          {
+            "token": "パパ活",
+            "token_id": 143216,
+            "probability": 0.038
+          },
+          {
+            "token": "inka",
+            "token_id": 74122,
+            "probability": 0.038
+          },
+          {
+            "token": "omorphic",
+            "token_id": 69917,
+            "probability": 0.0216
+          }
+        ]
+      },
+      {
+        "layer": 3,
+        "top_1_token": "/is",
+        "top_1_prob": 0.3573,
+        "top_5_candidates": [
+          {
+            "token": "/is",
+            "token_id": 46427,
+            "probability": 0.3573
+          },
+          {
+            "token": "rael",
+            "token_id": 6196,
+            "probability": 0.1314
+          },
+          {
+            "token": "elsen",
+            "token_id": 41145,
+            "probability": 0.0276
+          },
+          {
+            "token": "inka",
+            "token_id": 74122,
+            "probability": 0.0259
+          },
+          {
+            "token": "パパ活",
+            "token_id": 143216,
+            "probability": 0.0228
+          }
+        ]
+      },
+      {
+        "layer": 4,
+        "top_1_token": "/is",
+        "top_1_prob": 0.1667,
+        "top_5_candidates": [
+          {
+            "token": "/is",
+            "token_id": 46427,
+            "probability": 0.1667
+          },
+          {
+            "token": "rael",
+            "token_id": 6196,
+            "probability": 0.1298
+          },
+          {
+            "token": "otope",
+            "token_id": 50682,
+            "probability": 0.0421
+          },
+          {
+            "token": "ofi",
+            "token_id": 92023,
+            "probability": 0.0199
+          },
+          {
+            "token": "パパ活",
+            "token_id": 143216,
+            "probability": 0.0176
+          }
+        ]
+      },
+      {
+        "layer": 5,
+        "top_1_token": "otope",
+        "top_1_prob": 0.4502,
+        "top_5_candidates": [
+          {
+            "token": "otope",
+            "token_id": 50682,
+            "probability": 0.4502
+          },
+          {
+            "token": "amiento",
+            "token_id": 22820,
+            "probability": 0.0326
+          },
+          {
+            "token": "/is",
+            "token_id": 46427,
+            "probability": 0.0224
+          },
+          {
+            "token": "ofi",
+            "token_id": 92023,
+            "probability": 0.0211
+          },
+          {
+            "token": "amientos",
+            "token_id": 78309,
+            "probability": 0.0164
+          }
+        ]
+      },
+      {
+        "layer": 6,
+        "top_1_token": "otope",
+        "top_1_prob": 0.4229,
+        "top_5_candidates": [
+          {
+            "token": "otope",
+            "token_id": 50682,
+            "probability": 0.4229
+          },
+          {
+            "token": "amiento",
+            "token_id": 22820,
+            "probability": 0.0538
+          },
+          {
+            "token": "eti",
+            "token_id": 50898,
+            "probability": 0.0224
+          },
+          {
+            "token": "amientos",
+            "token_id": 78309,
+            "probability": 0.0136
+          },
+          {
+            "token": "ewidth",
+            "token_id": 28357,
+            "probability": 0.012
+          }
+        ]
+      },
+      {
+        "layer": 7,
+        "top_1_token": "otope",
+        "top_1_prob": 0.067,
+        "top_5_candidates": [
+          {
+            "token": "otope",
+            "token_id": 50682,
+            "probability": 0.067
+          },
+          {
+            "token": "⼀",
+            "token_id": 147488,
+            "probability": 0.0382
+          },
+          {
+            "token": " ____",
+            "token_id": 30743,
+            "probability": 0.0358
+          },
+          {
+            "token": "____",
+            "token_id": 2130,
+            "probability": 0.0246
+          },
+          {
+            "token": "‐",
+            "token_id": 29921,
+            "probability": 0.0204
+          }
+        ]
+      },
+      {
+        "layer": 8,
+        "top_1_token": "otope",
+        "top_1_prob": 0.1988,
+        "top_5_candidates": [
+          {
+            "token": "otope",
+            "token_id": 50682,
+            "probability": 0.1988
+          },
+          {
+            "token": " ...\n",
+            "token_id": 12236,
+            "probability": 0.1206
+          },
+          {
+            "token": "​",
+            "token_id": 15692,
+            "probability": 0.0646
+          },
+          {
+            "token": " a",
+            "token_id": 264,
+            "probability": 0.0392
+          },
+          {
+            "token": ",",
+            "token_id": 11,
+            "probability": 0.0346
+          }
+        ]
+      },
+      {
+        "layer": 9,
+        "top_1_token": " Dev",
+        "top_1_prob": 0.1663,
+        "top_5_candidates": [
+          {
+            "token": " Dev",
+            "token_id": 6040,
+            "probability": 0.1663
+          },
+          {
+            "token": " ...\n",
+            "token_id": 12236,
+            "probability": 0.1074
+          },
+          {
+            "token": "​",
+            "token_id": 15692,
+            "probability": 0.0738
+          },
+          {
+            "token": " In",
+            "token_id": 758,
+            "probability": 0.0575
+          },
+          {
+            "token": ",",
+            "token_id": 11,
+            "probability": 0.054
+          }
+        ]
+      },
+      {
+        "layer": 10,
+        "top_1_token": " C",
+        "top_1_prob": 0.1289,
+        "top_5_candidates": [
+          {
+            "token": " C",
+            "token_id": 356,
+            "probability": 0.1289
+          },
+          {
+            "token": " (",
+            "token_id": 320,
+            "probability": 0.1211
+          },
+          {
+            "token": " ...\n",
+            "token_id": 12236,
+            "probability": 0.0609
+          },
+          {
+            "token": ",",
+            "token_id": 11,
+            "probability": 0.0537
+          },
+          {
+            "token": ":",
+            "token_id": 25,
+            "probability": 0.0254
+          }
+        ]
+      },
+      {
+        "layer": 11,
+        "top_1_token": " C",
+        "top_1_prob": 0.0955,
+        "top_5_candidates": [
+          {
+            "token": " C",
+            "token_id": 356,
+            "probability": 0.0955
+          },
+          {
+            "token": ",",
+            "token_id": 11,
+            "probability": 0.0617
+          },
+          {
+            "token": ":",
+            "token_id": 25,
+            "probability": 0.0274
+          },
+          {
+            "token": "之一",
+            "token_id": 100653,
+            "probability": 0.0265
+          },
+          {
+            "token": " One",
+            "token_id": 3776,
+            "probability": 0.022
+          }
+        ]
+      },
+      {
+        "layer": 12,
+        "top_1_token": ",",
+        "top_1_prob": 0.2705,
+        "top_5_candidates": [
+          {
+            "token": ",",
+            "token_id": 11,
+            "probability": 0.2705
+          },
+          {
+            "token": " C",
+            "token_id": 356,
+            "probability": 0.0728
+          },
+          {
+            "token": ":",
+            "token_id": 25,
+            "probability": 0.039
+          },
+          {
+            "token": " ...\n",
+            "token_id": 12236,
+            "probability": 0.0366
+          },
+          {
+            "token": "\n",
+            "token_id": 198,
+            "probability": 0.0323
+          }
+        ]
+      },
+      {
+        "layer": 13,
+        "top_1_token": ",",
+        "top_1_prob": 0.1467,
+        "top_5_candidates": [
+          {
+            "token": ",",
+            "token_id": 11,
+            "probability": 0.1467
+          },
+          {
+            "token": "____",
+            "token_id": 2130,
+            "probability": 0.1216
+          },
+          {
+            "token": " C",
+            "token_id": 356,
+            "probability": 0.0737
+          },
+          {
+            "token": ":",
+            "token_id": 25,
+            "probability": 0.0476
+          },
+          {
+            "token": "\n",
+            "token_id": 198,
+            "probability": 0.042
+          }
+        ]
+      },
+      {
+        "layer": 14,
+        "top_1_token": "____",
+        "top_1_prob": 0.1681,
+        "top_5_candidates": [
+          {
+            "token": "____",
+            "token_id": 2130,
+            "probability": 0.1681
+          },
+          {
+            "token": ",",
+            "token_id": 11,
+            "probability": 0.1156
+          },
+          {
+            "token": "\n",
+            "token_id": 198,
+            "probability": 0.0746
+          },
+          {
+            "token": " C",
+            "token_id": 356,
+            "probability": 0.0658
+          },
+          {
+            "token": " ____",
+            "token_id": 30743,
+            "probability": 0.0581
+          }
+        ]
+      },
+      {
+        "layer": 15,
+        "top_1_token": "____",
+        "top_1_prob": 0.2983,
+        "top_5_candidates": [
+          {
+            "token": "____",
+            "token_id": 2130,
+            "probability": 0.2983
+          },
+          {
+            "token": " ____",
+            "token_id": 30743,
+            "probability": 0.2323
+          },
+          {
+            "token": ",",
+            "token_id": 11,
+            "probability": 0.1324
+          },
+          {
+            "token": "\n",
+            "token_id": 198,
+            "probability": 0.0379
+          },
+          {
+            "token": " C",
+            "token_id": 356,
+            "probability": 0.0245
+          }
+        ]
+      },
+      {
+        "layer": 16,
+        "top_1_token": " ____",
+        "top_1_prob": 0.6296,
+        "top_5_candidates": [
+          {
+            "token": " ____",
+            "token_id": 30743,
+            "probability": 0.6296
+          },
+          {
+            "token": "____",
+            "token_id": 2130,
+            "probability": 0.2316
+          },
+          {
+            "token": ",",
+            "token_id": 11,
+            "probability": 0.0403
+          },
+          {
+            "token": " ______",
+            "token_id": 32671,
+            "probability": 0.0102
+          },
+          {
+            "token": "\n",
+            "token_id": 198,
+            "probability": 0.0074
+          }
+        ]
+      },
+      {
+        "layer": 17,
+        "top_1_token": " ____",
+        "top_1_prob": 0.6099,
+        "top_5_candidates": [
+          {
+            "token": " ____",
+            "token_id": 30743,
+            "probability": 0.6099
+          },
+          {
+            "token": "____",
+            "token_id": 2130,
+            "probability": 0.3699
+          },
+          {
+            "token": " ______",
+            "token_id": 32671,
+            "probability": 0.0056
+          },
+          {
+            "token": "________",
+            "token_id": 3979,
+            "probability": 0.0041
+          },
+          {
+            "token": "_____",
+            "token_id": 80517,
+            "probability": 0.0019
+          }
+        ]
+      },
+      {
+        "layer": 18,
+        "top_1_token": " ____",
+        "top_1_prob": 0.7496,
+        "top_5_candidates": [
+          {
+            "token": " ____",
+            "token_id": 30743,
+            "probability": 0.7496
+          },
+          {
+            "token": "____",
+            "token_id": 2130,
+            "probability": 0.1781
+          },
+          {
+            "token": "\n",
+            "token_id": 198,
+            "probability": 0.01
+          },
+          {
+            "token": "_____",
+            "token_id": 80517,
+            "probability": 0.0094
+          },
+          {
+            "token": ":\n",
+            "token_id": 510,
+            "probability": 0.0089
+          }
+        ]
+      },
+      {
+        "layer": 19,
+        "top_1_token": " ____",
+        "top_1_prob": 0.8636,
+        "top_5_candidates": [
+          {
+            "token": " ____",
+            "token_id": 30743,
+            "probability": 0.8636
+          },
+          {
+            "token": "____",
+            "token_id": 2130,
+            "probability": 0.1031
+          },
+          {
+            "token": " ______",
+            "token_id": 32671,
+            "probability": 0.0109
+          },
+          {
+            "token": " __",
+            "token_id": 1304,
+            "probability": 0.0109
+          },
+          {
+            "token": " _____",
+            "token_id": 65892,
+            "probability": 0.0045
+          }
+        ]
+      },
+      {
+        "layer": 20,
+        "top_1_token": " ____",
+        "top_1_prob": 0.7409,
+        "top_5_candidates": [
+          {
+            "token": " ____",
+            "token_id": 30743,
+            "probability": 0.7409
+          },
+          {
+            "token": "____",
+            "token_id": 2130,
+            "probability": 0.1003
+          },
+          {
+            "token": " __",
+            "token_id": 1304,
+            "probability": 0.0537
+          },
+          {
+            "token": " ______",
+            "token_id": 32671,
+            "probability": 0.0418
+          },
+          {
+            "token": ":\n\n",
+            "token_id": 1447,
+            "probability": 0.0326
+          }
+        ]
+      },
+      {
+        "layer": 21,
+        "top_1_token": " Python",
+        "top_1_prob": 0.447,
+        "top_5_candidates": [
+          {
+            "token": " Python",
+            "token_id": 13027,
+            "probability": 0.447
+          },
+          {
+            "token": " ____",
+            "token_id": 30743,
+            "probability": 0.2711
+          },
+          {
+            "token": ":\n\n",
+            "token_id": 1447,
+            "probability": 0.113
+          },
+          {
+            "token": "____",
+            "token_id": 2130,
+            "probability": 0.0685
+          },
+          {
+            "token": ":\n",
+            "token_id": 510,
+            "probability": 0.0324
+          }
+        ]
+      },
+      {
+        "layer": 22,
+        "top_1_token": " Python",
+        "top_1_prob": 0.9489,
+        "top_5_candidates": [
+          {
+            "token": " Python",
+            "token_id": 13027,
+            "probability": 0.9489
+          },
+          {
+            "token": " ____",
+            "token_id": 30743,
+            "probability": 0.0325
+          },
+          {
+            "token": "____",
+            "token_id": 2130,
+            "probability": 0.0105
+          },
+          {
+            "token": ":\n\n",
+            "token_id": 1447,
+            "probability": 0.003
+          },
+          {
+            "token": "Python",
+            "token_id": 30280,
+            "probability": 0.0016
+          }
+        ]
+      },
+      {
+        "layer": 23,
+        "top_1_token": " Python",
+        "top_1_prob": 0.9974,
+        "top_5_candidates": [
+          {
+            "token": " Python",
+            "token_id": 13027,
+            "probability": 0.9974
+          },
+          {
+            "token": " python",
+            "token_id": 10135,
+            "probability": 0.0013
+          },
+          {
+            "token": "Python",
+            "token_id": 30280,
+            "probability": 0.001
+          },
+          {
+            "token": "python",
+            "token_id": 12669,
+            "probability": 0.0001
+          },
+          {
+            "token": " SQL",
+            "token_id": 7870,
+            "probability": 0.0001
+          }
+        ]
+      },
+      {
+        "layer": 24,
+        "top_1_token": " Python",
+        "top_1_prob": 0.9958,
+        "top_5_candidates": [
+          {
+            "token": " Python",
+            "token_id": 13027,
+            "probability": 0.9958
+          },
+          {
+            "token": " python",
+            "token_id": 10135,
+            "probability": 0.0017
+          },
+          {
+            "token": "Python",
+            "token_id": 30280,
+            "probability": 0.0008
+          },
+          {
+            "token": " SQL",
+            "token_id": 7870,
+            "probability": 0.0005
+          },
+          {
+            "token": " ____",
+            "token_id": 30743,
+            "probability": 0.0004
+          }
+        ]
+      },
+      {
+        "layer": 25,
+        "top_1_token": " Python",
+        "top_1_prob": 0.9958,
+        "top_5_candidates": [
+          {
+            "token": " Python",
+            "token_id": 13027,
+            "probability": 0.9958
+          },
+          {
+            "token": " SQL",
+            "token_id": 7870,
+            "probability": 0.001
+          },
+          {
+            "token": " python",
+            "token_id": 10135,
+            "probability": 0.001
+          },
+          {
+            "token": "Python",
+            "token_id": 30280,
+            "probability": 0.0008
+          },
+          {
+            "token": " ____",
+            "token_id": 30743,
+            "probability": 0.0002
+          }
+        ]
+      },
+      {
+        "layer": 26,
+        "top_1_token": " Python",
+        "top_1_prob": 0.7526,
+        "top_5_candidates": [
+          {
+            "token": " Python",
+            "token_id": 13027,
+            "probability": 0.7526
+          },
+          {
+            "token": " el",
+            "token_id": 655,
+            "probability": 0.0745
+          },
+          {
+            "token": ":\n\n",
+            "token_id": 1447,
+            "probability": 0.0188
+          },
+          {
+            "token": " __",
+            "token_id": 1304,
+            "probability": 0.0166
+          },
+          {
+            "token": " SQL",
+            "token_id": 7870,
+            "probability": 0.0138
+          }
+        ]
+      },
+      {
+        "layer": 27,
+        "top_1_token": " Python",
+        "top_1_prob": 0.4729,
+        "top_5_candidates": [
+          {
+            "token": " Python",
+            "token_id": 13027,
+            "probability": 0.4729
+          },
+          {
+            "token": " el",
+            "token_id": 655,
+            "probability": 0.0931
+          },
+          {
+            "token": ":\n\n",
+            "token_id": 1447,
+            "probability": 0.0498
+          },
+          {
+            "token": " __",
+            "token_id": 1304,
+            "probability": 0.0343
+          },
+          {
+            "token": ":",
+            "token_id": 25,
+            "probability": 0.0302
+          }
+        ]
+      }
+    ]
+  },
+  "svd_spectral_analysis": {
+    "layer_0_q_proj": {
+      "matrix_shape": [
+        2048,
+        2048
+      ],
+      "max_singular_val": 11.8673,
+      "min_singular_val": 0.0006,
+      "condition_number": 20006.33,
+      "effective_rank": 1552.9,
+      "max_possible_rank": 2048,
+      "rank_utilization_pct": "75.83%",
+      "energy_in_top_10pct_sv": 39.82,
+      "first_5_singular_values": [
+        11.8673,
+        8.1148,
+        6.2462,
+        6.0939,
+        5.2185
+      ]
+    },
+    "layer_0_gate_proj": {
+      "matrix_shape": [
+        6144,
+        2048
+      ],
+      "max_singular_val": 12.5474,
+      "min_singular_val": 0.181,
+      "condition_number": 69.32,
+      "effective_rank": 1766.81,
+      "max_possible_rank": 2048,
+      "rank_utilization_pct": "86.27%",
+      "energy_in_top_10pct_sv": 34.11,
+      "first_5_singular_values": [
+        12.5474,
+        10.5723,
+        10.182,
+        9.967,
+        9.7674
+      ]
+    },
+    "layer_14_q_proj": {
+      "matrix_shape": [
+        2048,
+        2048
+      ],
+      "max_singular_val": 9.2532,
+      "min_singular_val": 0.0003,
+      "condition_number": 31002.87,
+      "effective_rank": 1334.17,
+      "max_possible_rank": 2048,
+      "rank_utilization_pct": "65.14%",
+      "energy_in_top_10pct_sv": 57.45,
+      "first_5_singular_values": [
+        9.2532,
+        7.167,
+        7.0967,
+        6.4749,
+        6.242
+      ]
+    },
+    "layer_14_gate_proj": {
+      "matrix_shape": [
+        6144,
+        2048
+      ],
+      "max_singular_val": 9.1586,
+      "min_singular_val": 0.1872,
+      "condition_number": 48.93,
+      "effective_rank": 1858.6,
+      "max_possible_rank": 2048,
+      "rank_utilization_pct": "90.75%",
+      "energy_in_top_10pct_sv": 31.07,
+      "first_5_singular_values": [
+        9.1586,
+        6.3951,
+        6.1838,
+        6.1305,
+        6.0719
+      ]
+    },
+    "layer_27_q_proj": {
+      "matrix_shape": [
+        2048,
+        2048
+      ],
+      "max_singular_val": 11.1042,
+      "min_singular_val": 0.0003,
+      "condition_number": 41296.95,
+      "effective_rank": 1550.09,
+      "max_possible_rank": 2048,
+      "rank_utilization_pct": "75.69%",
+      "energy_in_top_10pct_sv": 41.69,
+      "first_5_singular_values": [
+        11.1042,
+        7.2727,
+        6.7008,
+        6.3899,
+        5.6967
+      ]
+    },
+    "layer_27_down_proj": {
+      "matrix_shape": [
+        2048,
+        6144
+      ],
+      "max_singular_val": 9.2538,
+      "min_singular_val": 0.7762,
+      "condition_number": 11.92,
+      "effective_rank": 1934.12,
+      "max_possible_rank": 2048,
+      "rank_utilization_pct": "94.44%",
+      "energy_in_top_10pct_sv": 23.38,
+      "first_5_singular_values": [
+        9.2538,
+        5.2191,
+        5.1141,
+        4.8009,
+        4.7807
+      ]
+    }
+  },
+  "protocol_and_tokenizer": {
+    "vocab_size": 151669,
+    "special_tokens": {
+      "eos_token": "<|im_end|>",
+      "pad_token": "<|endoftext|>"
+    },
+    "identified_control_tokens": {
+      "<think>": 151667,
+      "</think>": 151668,
+      "<|im_start|>": 151644,
+      "<|im_end|>": 151645,
+      "<|endoftext|>": 151643
+    },
+    "has_chat_template": true,
+    "rendered_sample_prompt": "<|im_start|>system\nEres un núcleo de análisis determinista.<|im_end|>\n<|im_start|>user\nExplica la verificación de integridad de datos.<|im_end|>\n"
+  }
+}

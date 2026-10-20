@@ -1,0 +1,688 @@
+{
+  "model_id": "Qwen/Qwen3-1.7B",
+  "license": "Apache-2.0",
+  "binary_shards": [
+    {
+      "file_name": "model-00001-of-00002.safetensors",
+      "file_size_bytes": 3441185608,
+      "header_size_bytes": 35648,
+      "payload_offset_bytes": 35656,
+      "tensor_count": 310,
+      "dtypes_distribution": {
+        "BF16": 310
+      },
+      "total_elements_in_shard": 1720574976,
+      "custom_metadata": {
+        "format": "pt"
+      },
+      "sample_tensors": [
+        "model.embed_tokens.weight",
+        "model.layers.0.input_layernorm.weight",
+        "model.layers.0.mlp.down_proj.weight",
+        "model.layers.0.mlp.gate_proj.weight",
+        "model.layers.0.mlp.up_proj.weight",
+        "model.layers.0.post_attention_layernorm.weight",
+        "model.layers.0.self_attn.k_norm.weight",
+        "model.layers.0.self_attn.k_proj.weight",
+        "model.layers.0.self_attn.o_proj.weight",
+        "model.layers.0.self_attn.q_norm.weight"
+      ]
+    },
+    {
+      "file_name": "model-00002-of-00002.safetensors",
+      "file_size_bytes": 622329984,
+      "header_size_bytes": 120,
+      "payload_offset_bytes": 128,
+      "tensor_count": 1,
+      "dtypes_distribution": {
+        "BF16": 1
+      },
+      "total_elements_in_shard": 311164928,
+      "custom_metadata": {
+        "format": "pt"
+      },
+      "sample_tensors": [
+        "lm_head.weight"
+      ]
+    }
+  ],
+  "architecture_summary": {
+    "config": {
+      "architectures": [
+        "Qwen3ForCausalLM"
+      ],
+      "attention_bias": false,
+      "attention_dropout": 0.0,
+      "bos_token_id": 151643,
+      "eos_token_id": 151645,
+      "head_dim": 128,
+      "hidden_act": "silu",
+      "hidden_size": 2048,
+      "initializer_range": 0.02,
+      "intermediate_size": 6144,
+      "max_position_embeddings": 40960,
+      "max_window_layers": 28,
+      "model_type": "qwen3",
+      "num_attention_heads": 16,
+      "num_hidden_layers": 28,
+      "num_key_value_heads": 8,
+      "rms_norm_eps": 1e-06,
+      "rope_scaling": null,
+      "rope_theta": 1000000,
+      "sliding_window": null,
+      "tie_word_embeddings": true,
+      "torch_dtype": "bfloat16",
+      "transformers_version": "4.51.0",
+      "use_cache": true,
+      "use_sliding_window": false,
+      "vocab_size": 151936
+    },
+    "total_tensors": 311,
+    "total_parameters_sum": 2031739904,
+    "total_parameters_billions": 2.0317,
+    "subsystem_parameters": {
+      "embeddings": 311164928,
+      "attention_qkv": 234881024,
+      "attention_out": 117440512,
+      "mlp_gate_up": 704643072,
+      "mlp_down": 352321536,
+      "layernorms": 123904,
+      "lm_head": 311164928,
+      "other": 0
+    },
+    "subsystem_percentages": {
+      "embeddings": "15.32%",
+      "attention_qkv": "11.56%",
+      "attention_out": "5.78%",
+      "mlp_gate_up": "34.68%",
+      "mlp_down": "17.34%",
+      "layernorms": "0.01%",
+      "lm_head": "15.32%",
+      "other": "0.00%"
+    },
+    "sample_tensor_details": [
+      {
+        "name": "lm_head.weight",
+        "shape": [
+          151936,
+          2048
+        ],
+        "numel": 311164928,
+        "dtype": "BF16",
+        "shard": "model-00002-of-00002.safetensors"
+      },
+      {
+        "name": "model.embed_tokens.weight",
+        "shape": [
+          151936,
+          2048
+        ],
+        "numel": 311164928,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      },
+      {
+        "name": "model.layers.0.input_layernorm.weight",
+        "shape": [
+          2048
+        ],
+        "numel": 2048,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      },
+      {
+        "name": "model.layers.0.mlp.down_proj.weight",
+        "shape": [
+          2048,
+          6144
+        ],
+        "numel": 12582912,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      },
+      {
+        "name": "model.layers.0.mlp.gate_proj.weight",
+        "shape": [
+          6144,
+          2048
+        ],
+        "numel": 12582912,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      },
+      {
+        "name": "model.layers.0.mlp.up_proj.weight",
+        "shape": [
+          6144,
+          2048
+        ],
+        "numel": 12582912,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      },
+      {
+        "name": "model.layers.0.post_attention_layernorm.weight",
+        "shape": [
+          2048
+        ],
+        "numel": 2048,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      },
+      {
+        "name": "model.layers.0.self_attn.k_norm.weight",
+        "shape": [
+          128
+        ],
+        "numel": 128,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      },
+      {
+        "name": "model.layers.0.self_attn.k_proj.weight",
+        "shape": [
+          1024,
+          2048
+        ],
+        "numel": 2097152,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      },
+      {
+        "name": "model.layers.0.self_attn.o_proj.weight",
+        "shape": [
+          2048,
+          2048
+        ],
+        "numel": 4194304,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      },
+      {
+        "name": "model.layers.0.self_attn.q_norm.weight",
+        "shape": [
+          128
+        ],
+        "numel": 128,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      },
+      {
+        "name": "model.layers.0.self_attn.q_proj.weight",
+        "shape": [
+          2048,
+          2048
+        ],
+        "numel": 4194304,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      },
+      {
+        "name": "model.layers.0.self_attn.v_proj.weight",
+        "shape": [
+          1024,
+          2048
+        ],
+        "numel": 2097152,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      },
+      {
+        "name": "model.layers.1.input_layernorm.weight",
+        "shape": [
+          2048
+        ],
+        "numel": 2048,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      },
+      {
+        "name": "model.layers.1.mlp.down_proj.weight",
+        "shape": [
+          2048,
+          6144
+        ],
+        "numel": 12582912,
+        "dtype": "BF16",
+        "shard": "model-00001-of-00002.safetensors"
+      }
+    ]
+  },
+  "weights_distribution": {
+    "embedding_stats": {
+      "shape": [
+        151936,
+        2048
+      ],
+      "mean": -0.000112,
+      "std": 0.034498,
+      "min": -0.353516,
+      "max": 0.292969,
+      "l2_norm": 574.9337
+    },
+    "final_norm_stats": {
+      "shape": [
+        2048
+      ],
+      "mean": 2.214892,
+      "std": 0.517139
+    },
+    "layers": {
+      "layer_0": {
+        "input_layernorm.weight": {
+          "shape": [
+            2048
+          ],
+          "mean": 0.087453,
+          "std": 0.05226,
+          "min": 0.055908,
+          "max": 1.007812,
+          "l2_norm": 4.6102,
+          "sparsity_ratio": 0.0
+        },
+        "self_attn.q_proj.weight": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "mean": -3e-06,
+          "std": 0.03517,
+          "min": -0.65625,
+          "max": 0.65625,
+          "l2_norm": 72.0303,
+          "sparsity_ratio": 0.0
+        },
+        "self_attn.k_proj.weight": {
+          "shape": [
+            1024,
+            2048
+          ],
+          "mean": 3e-06,
+          "std": 0.035771,
+          "min": -0.8125,
+          "max": 0.605469,
+          "l2_norm": 51.8051,
+          "sparsity_ratio": 0.0
+        },
+        "self_attn.v_proj.weight": {
+          "shape": [
+            1024,
+            2048
+          ],
+          "mean": 3.5e-05,
+          "std": 0.033548,
+          "min": -0.217773,
+          "max": 0.22168,
+          "l2_norm": 48.5848,
+          "sparsity_ratio": 0.0
+        },
+        "self_attn.o_proj.weight": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "mean": -2e-06,
+          "std": 0.032374,
+          "min": -0.451172,
+          "max": 0.507812,
+          "l2_norm": 66.3041,
+          "sparsity_ratio": 0.0
+        },
+        "post_attention_layernorm.weight": {
+          "shape": [
+            2048
+          ],
+          "mean": 0.197519,
+          "std": 0.146122,
+          "min": -0.636719,
+          "max": 0.804688,
+          "l2_norm": 11.1179,
+          "sparsity_ratio": 0.0
+        },
+        "mlp.gate_proj.weight": {
+          "shape": [
+            6144,
+            2048
+          ],
+          "mean": 0.000212,
+          "std": 0.038545,
+          "min": -0.640625,
+          "max": 0.628906,
+          "l2_norm": 136.6873,
+          "sparsity_ratio": 0.0
+        },
+        "mlp.up_proj.weight": {
+          "shape": [
+            6144,
+            2048
+          ],
+          "mean": -4e-06,
+          "std": 0.03143,
+          "min": -0.410156,
+          "max": 0.390625,
+          "l2_norm": 111.4577,
+          "sparsity_ratio": 0.0
+        },
+        "mlp.down_proj.weight": {
+          "shape": [
+            2048,
+            6144
+          ],
+          "mean": 1e-06,
+          "std": 0.033226,
+          "min": -0.628906,
+          "max": 0.507812,
+          "l2_norm": 117.8313,
+          "sparsity_ratio": 0.0
+        }
+      },
+      "layer_13": {
+        "input_layernorm.weight": {
+          "shape": [
+            2048
+          ],
+          "mean": 1.323574,
+          "std": 0.604564,
+          "min": -0.898438,
+          "max": 8.0625,
+          "l2_norm": 65.848,
+          "sparsity_ratio": 0.0
+        },
+        "self_attn.q_proj.weight": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "mean": 1.3e-05,
+          "std": 0.035038,
+          "min": -0.400391,
+          "max": 0.431641,
+          "l2_norm": 71.7571,
+          "sparsity_ratio": 0.0
+        },
+        "self_attn.k_proj.weight": {
+          "shape": [
+            1024,
+            2048
+          ],
+          "mean": 2.5e-05,
+          "std": 0.030699,
+          "min": -0.291016,
+          "max": 0.294922,
+          "l2_norm": 44.4588,
+          "sparsity_ratio": 0.0
+        },
+        "self_attn.v_proj.weight": {
+          "shape": [
+            1024,
+            2048
+          ],
+          "mean": 1.6e-05,
+          "std": 0.03322,
+          "min": -0.21582,
+          "max": 0.206055,
+          "l2_norm": 48.1096,
+          "sparsity_ratio": 0.0
+        },
+        "self_attn.o_proj.weight": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "mean": -2e-06,
+          "std": 0.029061,
+          "min": -0.470703,
+          "max": 0.361328,
+          "l2_norm": 59.5191,
+          "sparsity_ratio": 0.0
+        },
+        "post_attention_layernorm.weight": {
+          "shape": [
+            2048
+          ],
+          "mean": 0.789517,
+          "std": 0.229192,
+          "min": -4.9e-05,
+          "max": 1.734375,
+          "l2_norm": 37.2038,
+          "sparsity_ratio": 0.0
+        },
+        "mlp.gate_proj.weight": {
+          "shape": [
+            6144,
+            2048
+          ],
+          "mean": 1.8e-05,
+          "std": 0.033637,
+          "min": -0.640625,
+          "max": 0.640625,
+          "l2_norm": 119.2859,
+          "sparsity_ratio": 0.0
+        },
+        "mlp.up_proj.weight": {
+          "shape": [
+            6144,
+            2048
+          ],
+          "mean": -1.7e-05,
+          "std": 0.03404,
+          "min": -0.404297,
+          "max": 0.570312,
+          "l2_norm": 120.72,
+          "sparsity_ratio": 0.0
+        },
+        "mlp.down_proj.weight": {
+          "shape": [
+            2048,
+            6144
+          ],
+          "mean": 1.1e-05,
+          "std": 0.032639,
+          "min": -0.972656,
+          "max": 0.695312,
+          "l2_norm": 115.7429,
+          "sparsity_ratio": 0.0
+        }
+      },
+      "layer_27": {
+        "input_layernorm.weight": {
+          "shape": [
+            2048
+          ],
+          "mean": 17.284859,
+          "std": 4.693224,
+          "min": 1.53125,
+          "max": 77.5,
+          "l2_norm": 810.5313,
+          "sparsity_ratio": 0.0
+        },
+        "self_attn.q_proj.weight": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "mean": 1.4e-05,
+          "std": 0.03506,
+          "min": -0.419922,
+          "max": 0.539062,
+          "l2_norm": 71.8024,
+          "sparsity_ratio": 0.0
+        },
+        "self_attn.k_proj.weight": {
+          "shape": [
+            1024,
+            2048
+          ],
+          "mean": -2e-05,
+          "std": 0.033458,
+          "min": -1.601562,
+          "max": 0.890625,
+          "l2_norm": 48.454,
+          "sparsity_ratio": 0.0
+        },
+        "self_attn.v_proj.weight": {
+          "shape": [
+            1024,
+            2048
+          ],
+          "mean": -9e-06,
+          "std": 0.037179,
+          "min": -0.231445,
+          "max": 0.277344,
+          "l2_norm": 53.8429,
+          "sparsity_ratio": 0.0
+        },
+        "self_attn.o_proj.weight": {
+          "shape": [
+            2048,
+            2048
+          ],
+          "mean": 1e-06,
+          "std": 0.034733,
+          "min": -0.558594,
+          "max": 0.523438,
+          "l2_norm": 71.1349,
+          "sparsity_ratio": 0.0
+        },
+        "post_attention_layernorm.weight": {
+          "shape": [
+            2048
+          ],
+          "mean": 3.074651,
+          "std": 3.486946,
+          "min": 1.2e-05,
+          "max": 153.0,
+          "l2_norm": 210.3562,
+          "sparsity_ratio": 0.0
+        },
+        "mlp.gate_proj.weight": {
+          "shape": [
+            6144,
+            2048
+          ],
+          "mean": -5.3e-05,
+          "std": 0.036967,
+          "min": -0.695312,
+          "max": 0.664062,
+          "l2_norm": 131.1017,
+          "sparsity_ratio": 0.0
+        },
+        "mlp.up_proj.weight": {
+          "shape": [
+            6144,
+            2048
+          ],
+          "mean": -1e-06,
+          "std": 0.038222,
+          "min": -0.453125,
+          "max": 1.054688,
+          "l2_norm": 135.5433,
+          "sparsity_ratio": 0.0
+        },
+        "mlp.down_proj.weight": {
+          "shape": [
+            2048,
+            6144
+          ],
+          "mean": -1e-06,
+          "std": 0.034956,
+          "min": -0.996094,
+          "max": 0.992188,
+          "l2_norm": 123.9678,
+          "sparsity_ratio": 0.0
+        }
+      }
+    }
+  },
+  "activation_probing": {
+    "test_prompt": "El núcleo cognitivo de Simple Domain audita datos deterministas",
+    "token_count": 15,
+    "forward_latency_ms": 7054.0,
+    "predicted_next_token_id": 379,
+    "predicted_next_token_text": " y",
+    "logits_shape": [
+      1,
+      15,
+      151936
+    ],
+    "captured_residual_stream": {
+      "embedding": {
+        "shape": [
+          1,
+          15,
+          2048
+        ],
+        "mean_norm": 1.636,
+        "std": 0.0363,
+        "max": 0.1865,
+        "min": -0.1807
+      },
+      "layer_0_residual": {
+        "shape": [
+          1,
+          15,
+          2048
+        ],
+        "mean_norm": 16.7563,
+        "std": 0.3729,
+        "max": 10.1875,
+        "min": -3.75
+      },
+      "layer_7_residual": {
+        "shape": [
+          1,
+          15,
+          2048
+        ],
+        "mean_norm": 1085.1606,
+        "std": 87.7076,
+        "max": 12992.0,
+        "min": -152.0
+      },
+      "layer_14_residual": {
+        "shape": [
+          1,
+          15,
+          2048
+        ],
+        "mean_norm": 1203.0782,
+        "std": 87.7921,
+        "max": 12992.0,
+        "min": -138.0
+      },
+      "layer_21_residual": {
+        "shape": [
+          1,
+          15,
+          2048
+        ],
+        "mean_norm": 2091.7,
+        "std": 91.1253,
+        "max": 12992.0,
+        "min": -212.0
+      },
+      "layer_27_residual": {
+        "shape": [
+          1,
+          15,
+          2048
+        ],
+        "mean_norm": 3662.563,
+        "std": 82.8475,
+        "max": 2624.0,
+        "min": -736.0
+      },
+      "final_layernorm": {
+        "shape": [
+          1,
+          15,
+          2048
+        ],
+        "mean_norm": 97.9992,
+        "std": 2.1901,
+        "max": 45.75,
+        "min": -53.75
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "target_component": "Layer_16_Head_14",
+  "ov_and_qk_circuit_analysis": {
+    "head_index": 14,
+    "kv_head_mapped_index": 7,
+    "head_dimension": 128,
+    "trace_w_ov": 15.8221,
+    "positive_eigenvalues_ratio": 0.5146,
+    "max_singular_val_ov": 3.3587,
+    "effective_rank_ov": 120.55,
+    "max_rank_ov": 128,
+    "is_copying_circuit": true,
+    "first_5_singular_vals_ov": [
+      3.3587,
+      2.5511,
+      2.3992,
+      2.079,
+      1.9587
+    ],
+    "first_5_singular_vals_qk": [
+      11.5655,
+      10.3741,
+      9.5208,
+      8.5703,
+      7.9748
+    ]
+  },
+  "causal_ablation_experiment": {
+    "prompt_evaluated": "Las constantes cosmológicas son: Lambda, Gamma, Omega, Phi, Kappa. De nuevo: Lambda, Gamma, Omega, Phi,",
+    "expected_token": " Kappa",
+    "intact_model": {
+      "top_1_predicted": " K",
+      "target_token_prob": 0.9994,
+      "target_token_prob_pct": "99.94%"
+    },
+    "ablated_model_head_14_zeroed": {
+      "top_1_predicted": " K",
+      "target_token_prob": 0.9996,
+      "target_token_prob_pct": "99.96%"
+    },
+    "causal_impact": {
+      "absolute_prob_drop": -0.0002,
+      "relative_prob_drop_pct": "-0.02%",
+      "is_causally_critical": false
+    }
+  }
+}
